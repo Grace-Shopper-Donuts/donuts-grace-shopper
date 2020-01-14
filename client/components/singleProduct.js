@@ -14,11 +14,11 @@ class SingleProduct extends React.Component {
 
   render() {
     const {name, imgPath, price, description} = this.props.currentProduct
-    console.log(this.props)
+    console.log(imgPath)
     return (
       <div>
         <div>
-          <img src={imgPath} alt={name} />
+          <img src={'/' + imgPath} />
         </div>
         <div>
           <div>{name}</div>
