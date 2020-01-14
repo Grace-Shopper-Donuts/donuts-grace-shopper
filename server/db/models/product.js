@@ -6,7 +6,7 @@ const Product = db.define('product', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  cost: {
+  price: {
     type: Sequelize.DECIMAL,
     allowNull: false
   },

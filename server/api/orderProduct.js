@@ -13,7 +13,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
-    const orderProduct = await OrderProduct.findById(req.params.id, {
+    const orderProduct = await OrderProduct.findByPk(req.params.id, {
       include: [{model: Order}]
     })
     res.json(orderProduct)

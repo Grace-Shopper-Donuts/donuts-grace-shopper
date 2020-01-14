@@ -29,11 +29,11 @@ async function seed() {
   const products = await Promise.all([
     Product.create({
       name: 'Guitar',
-      cost: 99.99
+      price: 99.99
     }),
     Product.create({
       name: 'Piano',
-      cost: 399.99
+      price: 399.99
     })
   ])
 

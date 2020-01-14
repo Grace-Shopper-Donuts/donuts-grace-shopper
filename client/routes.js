@@ -4,6 +4,7 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {Login, Signup, UserHome, AllProductsContainer} from './components'
 import {me} from './store'
+import SingleProduct from './components/singleProduct'
 
 /**
  * COMPONENT
@@ -29,7 +30,7 @@ class Routes extends Component {
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
+        <Route exact path="/products/:id" component={SingleProduct} />
       </Switch>
     )
   }
