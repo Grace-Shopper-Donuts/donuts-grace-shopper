@@ -1,34 +1,31 @@
 import React from 'React'
+import ProductThumb from './ProductThumb'
 import {connect} from 'react-redux'
 import {getAllProducts} from '../store/reducers/allProducts'
 
 class AllProducts extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   componentDidMount() {
-    this.props.getAllProducts()
+    this.props.getProducts()
   }
 
   render() {
-    const {products} = this.props
-    console.log(this.props)
     return (
       <div>
-        {products.map(product => {
-          return <div key={product.id}>{product.name}</div>
+        {this.props.products.map(product => {
+          return <ProductThumb key={product.id} product={product} />
         })}
       </div>
     )
   }
 }
 
+
 const mapState = state => {
   return {
     products: state.allProducts
   }
 }
+
 
 const mapDispatch = dispatch => {
   return {
