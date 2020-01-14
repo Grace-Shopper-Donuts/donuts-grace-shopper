@@ -2,9 +2,10 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, AllProductsContainer} from './components'
+import {Login, Signup, UserHome} from './components'
+import AllProductsContainer from './components/AllProducts'
 import {me} from './store'
-import SingleProduct from './components/singleProduct'
+import SingleProduct from './components/SingleProduct'
 
 /**
  * COMPONENT
@@ -19,8 +20,9 @@ class Routes extends Component {
 
     return (
       <Switch>
+        <Route exact path="/products" component={AllProductsContainer} />
+        <Route exact path="/products/:id" component={SingleProduct} />
         {/* Routes placed here are available to all visitors */}
-        <Route path="/products" component={AllProductsContainer}/>
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         {isLoggedIn && (
@@ -30,7 +32,6 @@ class Routes extends Component {
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
-        <Route exact path="/products/:id" component={SingleProduct} />
       </Switch>
     )
   }

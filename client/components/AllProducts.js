@@ -1,5 +1,7 @@
 import React from 'React'
 import ProductThumb from './ProductThumb'
+import {connect} from 'react-redux'
+import {getAllProducts} from '../store/reducers/allProducts'
 
 class AllProducts extends React.Component {
   componentDidMount() {
@@ -17,21 +19,19 @@ class AllProducts extends React.Component {
   }
 }
 
-const mapState = function(state) {
+
+const mapState = state => {
   return {
-    products: state.products
+    products: state.allProducts
   }
 }
 
-const mapDispatch = function(dispatch) {
+
+const mapDispatch = dispatch => {
   return {
-    getProducts: function() {
-      const action = getProducts()
-      dispatch(action)
-    }
+    getAllProducts: () => dispatch(getAllProducts())
   }
 }
 
-const componentCreator = connect(mapState, mapDispatch)
-const AllProductsContainer = componentCreator(AllProducts)
+const AllProductsContainer = connect(mapState, mapDispatch)(AllProducts)
 export default AllProductsContainer
