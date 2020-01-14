@@ -15,7 +15,22 @@ nav a {
   margin: 1em;
 }
 
-form div {
+nav div {
+  display: inline-block;
   margin: 1em;
+}
+
+nav h1 {
+  display: inline-block;
+  font-size: 2.5em;
+  margin: 0.5em;
+}
+
+nav input {
+  display: inline;
+  margin: 1em;
+}
+
+form div {
   display: inline-block;
 }
