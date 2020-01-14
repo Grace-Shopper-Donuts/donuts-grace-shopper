@@ -14,6 +14,7 @@ class SingleProduct extends React.Component {
 
   render() {
     const {name, imgPath, price, description} = this.props.currentProduct
+    console.log(this.props)
     return (
       <div>
         <div>
