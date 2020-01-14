@@ -1,38 +1,31 @@
-import React from "React"
+import React from 'React'
+import ProductThumb from './ProductThumb'
 
 class AllProducts extends React.Component {
-  componentDidMount(){
+  componentDidMount() {
     this.props.getProducts()
   }
 
-  render(){
+  render() {
     return (
       <div>
         {this.props.products.map(product => {
-        return (
-          <ul>
-            <li>
-              <img src = {product.imgPath}/>
-              {product.name}
-              <button> Add to Cart</button>
-            </li>
-          </ul>
-        )
-      })}
+          return <ProductThumb key={product.id} product={product} />
+        })}
       </div>
     )
   }
 }
 
-const mapState = function(state){
+const mapState = function(state) {
   return {
     products: state.products
   }
 }
 
-const mapDispatch = function(dispatch){
+const mapDispatch = function(dispatch) {
   return {
-    getProducts: function(){
+    getProducts: function() {
       const action = getProducts()
       dispatch(action)
     }
