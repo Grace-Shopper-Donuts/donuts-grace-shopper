@@ -5,7 +5,7 @@ import {getAllProducts} from '../store/reducers/allProducts'
 
 class AllProducts extends React.Component {
   componentDidMount() {
-    this.props.getProducts()
+    this.props.getAllProducts()
   }
 
   render() {
@@ -19,13 +19,11 @@ class AllProducts extends React.Component {
   }
 }
 
-
 const mapState = state => {
   return {
     products: state.allProducts
   }
 }
-
 
 const mapDispatch = dispatch => {
   return {
