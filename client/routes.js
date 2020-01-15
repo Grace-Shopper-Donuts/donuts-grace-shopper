@@ -6,6 +6,7 @@ import {Login, Signup, UserHome} from './components'
 import AllProductsContainer from './components/AllProducts'
 import {me} from './store'
 import SingleProduct from './components/SingleProduct'
+import HomePage from './components/HomePage'
 
 /**
  * COMPONENT
@@ -20,6 +21,7 @@ class Routes extends Component {
 
     return (
       <Switch>
+        <Route exact path="/" component={HomePage} />
         <Route exact path="/products" component={AllProductsContainer} />
         <Route exact path="/products/:id" component={SingleProduct} />
         {/* Routes placed here are available to all visitors */}
