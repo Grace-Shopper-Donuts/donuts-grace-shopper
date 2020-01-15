@@ -5,7 +5,6 @@ const {User} = require('../server/db/models')
 const {Product} = require('../server/db/models')
 const {Order} = require('../server/db/models')
 const {OrderProduct} = require('../server/db/models')
-const {CartProduct} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -25,6 +24,8 @@ async function seed() {
       password: '123'
     })
   ])
+
+  const [john, ricky] = users
 
   const products = await Promise.all([
     Product.create({
@@ -69,80 +70,88 @@ async function seed() {
     })
   ])
 
+  const [guitar, piano] = products
+
   const orders = await Promise.all([
     Order.create({
-      userId: 1,
+      userId: john.id,
       totalPrice: 499.98,
       completed: true
     }),
     Order.create({
-      userId: 2,
+      userId: ricky.id,
       totalPrice: 499.97,
       completed: true
     }),
     Order.create({
-      userId: 1,
+      userId: john.id,
       totalPrice: 123.45,
       completed: true
     }),
     Order.create({
-      userId: 1,
+      userId: john.id,
       totalPrice: 67.89,
       completed: false
     })
   ])
 
+  const [ord1, ord2, ord3, ord4] = orders
+
   const orderProducts = await Promise.all([
     OrderProduct.create({
-      orderId: 1,
+      orderId: ord1.id,
       productId: 1,
-      quantity: 1
+      quantity: 1,
+      status: 'ordered'
     }),
     OrderProduct.create({
-      orderId: 1,
+      orderId: ord1.id,
       productId: 2,
-      quantity: 2
+      quantity: 2,
+      status: 'ordered'
     }),
     OrderProduct.create({
-      orderId: 2,
+      orderId: ord2.id,
       productId: 1,
-      quantity: 3
+      quantity: 3,
+      status: 'ordered'
     }),
     OrderProduct.create({
-      orderId: 2,
+      orderId: ord2.id,
       productId: 2,
-      quantity: 4
-    })
-  ])
-
-  const cartProducts = await Promise.all([
-    CartProduct.create({
-      userId: 1,
+      quantity: 4,
+      status: 'ordered'
+    }),
+    OrderProduct.create({
+      orderId: ord3.id,
       productId: 1,
-      quantity: 1
+      quantity: 1,
+      status: 'cart'
     }),
-    CartProduct.create({
-      userId: 1,
+    OrderProduct.create({
+      orderId: ord3.id,
       productId: 2,
-      quantity: 2
+      quantity: 2,
+      status: 'cart'
     }),
-    CartProduct.create({
-      userId: 2,
+    OrderProduct.create({
+      orderId: ord4.id,
       productId: 1,
-      quantity: 3
+      quantity: 3,
+      status: 'cart'
     }),
-    CartProduct.create({
-      userId: 2,
+    OrderProduct.create({
+      orderId: ord4.id,
       productId: 2,
-      quantity: 4
+      quantity: 4,
+      status: 'cart'
     })
   ])
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${products.length} products`)
   console.log(`seeded ${orders.length} orders`)
-  // console.log(`seeded ${orderProducts.length} orderProducts`)
-  // console.log(`seeded ${cartProducts.length} cartProducts`)
+  console.log(`seeded ${orderProducts.length} orderProducts`)
   console.log(`seeded successfully`)
 }
 
