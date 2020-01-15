@@ -102,49 +102,21 @@ async function seed() {
       orderId: ord1.id,
       productId: 1,
       quantity: 1,
-      status: 'ordered'
     }),
     OrderProduct.create({
       orderId: ord1.id,
       productId: 2,
       quantity: 2,
-      status: 'ordered'
     }),
     OrderProduct.create({
       orderId: ord2.id,
       productId: 1,
       quantity: 3,
-      status: 'ordered'
     }),
     OrderProduct.create({
       orderId: ord2.id,
       productId: 2,
-      quantity: 4,
-      status: 'ordered'
-    }),
-    OrderProduct.create({
-      orderId: ord3.id,
-      productId: 1,
-      quantity: 1,
-      status: 'cart'
-    }),
-    OrderProduct.create({
-      orderId: ord3.id,
-      productId: 2,
-      quantity: 2,
-      status: 'cart'
-    }),
-    OrderProduct.create({
-      orderId: ord4.id,
-      productId: 1,
-      quantity: 3,
-      status: 'cart'
-    }),
-    OrderProduct.create({
-      orderId: ord4.id,
-      productId: 2,
-      quantity: 4,
-      status: 'cart'
+      quantity: 4
     })
   ])
 

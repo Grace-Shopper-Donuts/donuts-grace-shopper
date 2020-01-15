@@ -6,9 +6,10 @@ const OrderProduct = db.define('orderProduct', {
     type: Sequelize.INTEGER,
     allowNull: false
   },
-  status: {
-    type: Sequelize.ENUM('ordered', 'cart'),
-    allowNull: false
+  completed: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
   }
   // price at time of checkout
 })
