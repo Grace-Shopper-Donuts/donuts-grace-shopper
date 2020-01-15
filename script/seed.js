@@ -25,6 +25,8 @@ async function seed() {
     })
   ])
 
+  const [john, ricky] = users
+
   const products = await Promise.all([
     Product.create({
       name: 'Guitar',
@@ -38,68 +40,56 @@ async function seed() {
     })
   ])
 
+  const [guitar, piano] = products
+
   const orders = await Promise.all([
     Order.create({
-      userId: 1,
+      userId: john.id,
       totalPrice: 499.98
     }),
     Order.create({
-      userId: 2,
+      userId: ricky.id,
+      totalPrice: 499.97
+    }),
+    Order.create({
+      userId: john.id,
+      totalPrice: 499.98
+    }),
+    Order.create({
+      userId: ricky.id,
       totalPrice: 499.97
     })
   ])
 
+  const [ord1, ord2, ord3, ord4] = orders
+
   const orderProducts = await Promise.all([
     OrderProduct.create({
-      orderId: 1,
+      orderId: ord1.id,
       productId: 1,
-      quantity: 1
+      quantity: 1,
     }),
     OrderProduct.create({
-      orderId: 1,
+      orderId: ord1.id,
       productId: 2,
-      quantity: 2
+      quantity: 2,
     }),
     OrderProduct.create({
-      orderId: 2,
+      orderId: ord2.id,
       productId: 1,
-      quantity: 3
+      quantity: 3,
     }),
     OrderProduct.create({
-      orderId: 2,
+      orderId: ord2.id,
       productId: 2,
       quantity: 4
     })
   ])
 
-  // const cartProducts = await Promise.all([
-  //   CartProduct.create({
-  //     userId: 1,
-  //     productId: 1,
-  //     quantity: 1
-  //   }),
-  //   CartProduct.create({
-  //     userId: 1,
-  //     productId: 2,
-  //     quantity: 2
-  //   }),
-  //   CartProduct.create({
-  //     userId: 2,
-  //     productId: 1,
-  //     quantity: 3
-  //   }),
-  //   CartProduct.create({
-  //     userId: 2,
-  //     productId: 2,
-  //     quantity: 4
-  //   })
-  // ])
-
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${products.length} products`)
   console.log(`seeded ${orders.length} orders`)
-  // console.log(`seeded ${orderProducts.length} orderProducts`)
-  // console.log(`seeded ${cartProducts.length} cartProducts`)
+  console.log(`seeded ${orderProducts.length} orderProducts`)
   console.log(`seeded successfully`)
 }
 
