@@ -7,7 +7,11 @@ const {Order} = require('../server/db/models')
 const {OrderProduct} = require('../server/db/models')
 
 async function seed() {
-  await db.sync({force: true})
+  await db
+    .sync
+    // {force: true}
+    ()
+
   console.log('db synced!')
 
   const users = await Promise.all([
@@ -101,17 +105,17 @@ async function seed() {
     OrderProduct.create({
       orderId: ord1.id,
       productId: 1,
-      quantity: 1,
+      quantity: 1
     }),
     OrderProduct.create({
       orderId: ord1.id,
       productId: 2,
-      quantity: 2,
+      quantity: 2
     }),
     OrderProduct.create({
       orderId: ord2.id,
       productId: 1,
-      quantity: 3,
+      quantity: 3
     }),
     OrderProduct.create({
       orderId: ord2.id,

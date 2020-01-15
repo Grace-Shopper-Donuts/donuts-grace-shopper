@@ -9,6 +9,7 @@ import SingleProduct from './components/SingleProduct'
 import HomePage from './components/HomePage'
 import AccountPage from './components/AccountPage'
 import OrderHistory from './components/OrderHistory'
+import CartList from './components/CartList'
 
 /**
  * COMPONENT
@@ -23,10 +24,11 @@ class Routes extends Component {
 
     return (
       <Switch>
+        {/* Routes placed here are available to all visitors */}
         <Route exact path="/" component={HomePage} />
         <Route exact path="/products" component={AllProductsContainer} />
         <Route exact path="/products/:id" component={SingleProduct} />
-        {/* Routes placed here are available to all visitors */}
+        <Route exact path="/cart" component={CartList} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         {isLoggedIn && (

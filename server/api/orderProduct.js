@@ -13,6 +13,32 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/cart', async (req, res, next) => {
+  try {
+    const id = req.user.id
+    let currentOrder = await Order.findAll({
+      where: {
+        userId: id,
+        completed: false
+      }
+    })
+    currentOrder = currentOrder[0]
+    const cartProducts = await OrderProduct.findAll({
+      where: {
+        orderId: currentOrder.id
+      },
+      include: [
+        {
+          model: Product
+        }
+      ]
+    })
+    res.send(cartProducts)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.get('/:id', async (req, res, next) => {
   try {
     const orderProduct = await OrderProduct.findByPk(req.params.id, {

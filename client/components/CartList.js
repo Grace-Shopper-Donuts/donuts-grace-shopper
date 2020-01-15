@@ -1,16 +1,19 @@
 import React from 'React'
 import {connect} from 'react-redux'
+import {getCartProducts} from '../store/reducers/orderProducts'
+import CartProduct from './CartProduct'
 
 class CartList extends React.Component {
   componentDidMount() {
-    this.props.getAllProducts()
+    this.props.getCartProducts()
   }
 
   render() {
+    const {cartProducts} = this.props
     return (
       <div>
-        {this.props.cartProducts.map(product => {
-          return <p key={product.id}>{product.name}</p>
+        {cartProducts.map(product => {
+          return <CartProduct key={product.productId} product={product} />
         })}
       </div>
     )
@@ -19,15 +22,14 @@ class CartList extends React.Component {
 
 const mapState = state => {
   return {
-    products: state.allProducts
+    cartProducts: state.orderProducts
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    addOrderProductToCart: () => dispatch(addOrderProductToCart())
+    getCartProducts: () => dispatch(getCartProducts())
   }
 }
 
-const CartListContainer = connect(mapState, mapDispatch)(CartList)
-export default CartListContainer
+export default connect(mapState, mapDispatch)(CartList)
