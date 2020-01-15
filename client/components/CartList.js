@@ -9,8 +9,8 @@ class CartList extends React.Component {
   render() {
     return (
       <div>
-        {this.props.products.map(product => {
-          return <ProductThumb key={product.id} product={product} />
+        {this.props.cartProducts.map(product => {
+          return <p key={product.id}>{product.name}</p>
         })}
       </div>
     )
@@ -25,7 +25,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getAllProducts: () => dispatch(getAllProducts())
+    addOrderProductToCart: () => dispatch(addOrderProductToCart())
   }
 }
 

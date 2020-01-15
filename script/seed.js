@@ -5,7 +5,6 @@ const {User} = require('../server/db/models')
 const {Product} = require('../server/db/models')
 const {Order} = require('../server/db/models')
 const {OrderProduct} = require('../server/db/models')
-const {CartProduct} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -73,28 +72,28 @@ async function seed() {
     })
   ])
 
-  const cartProducts = await Promise.all([
-    CartProduct.create({
-      userId: 1,
-      productId: 1,
-      quantity: 1
-    }),
-    CartProduct.create({
-      userId: 1,
-      productId: 2,
-      quantity: 2
-    }),
-    CartProduct.create({
-      userId: 2,
-      productId: 1,
-      quantity: 3
-    }),
-    CartProduct.create({
-      userId: 2,
-      productId: 2,
-      quantity: 4
-    })
-  ])
+  // const cartProducts = await Promise.all([
+  //   CartProduct.create({
+  //     userId: 1,
+  //     productId: 1,
+  //     quantity: 1
+  //   }),
+  //   CartProduct.create({
+  //     userId: 1,
+  //     productId: 2,
+  //     quantity: 2
+  //   }),
+  //   CartProduct.create({
+  //     userId: 2,
+  //     productId: 1,
+  //     quantity: 3
+  //   }),
+  //   CartProduct.create({
+  //     userId: 2,
+  //     productId: 2,
+  //     quantity: 4
+  //   })
+  // ])
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${products.length} products`)
