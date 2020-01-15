@@ -5,15 +5,17 @@ const ProductThumb = props => {
   const {product} = props
 
   return (
-    <div>
+    <div className="productThumb">
       <Link to={`/products/${product.id}`}>
-        <img src={'/' + product.imgPath} />
+        <img src={'/' + product.imgPath} className="productThumbImg" />
       </Link>
-      <Link to={`/products/${product.id}`}>
-        <div>{product.name}</div>
-      </Link>
-      <div>{product.price}</div>
-      <button>ADD TO CART</button>
+      <div className="productThumbInfo">
+        <Link to={`/products/${product.id}`}>
+          <div>{product.name}</div>
+        </Link>
+        <div>{product.price}</div>
+        <button>ADD TO CART</button>
+      </div>
     </div>
   )
 }

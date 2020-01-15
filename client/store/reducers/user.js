@@ -1,5 +1,5 @@
 import axios from 'axios'
-import history from '../history'
+import history from '../../history'
 
 /**
  * ACTION TYPES
@@ -40,7 +40,7 @@ export const auth = (email, password, method) => async dispatch => {
 
   try {
     dispatch(getUser(res.data))
-    history.push('/home')
+    history.push('/account')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
   }

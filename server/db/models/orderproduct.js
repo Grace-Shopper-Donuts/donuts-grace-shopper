@@ -11,6 +11,7 @@ const OrderProduct = db.define('orderProduct', {
     allowNull: false,
     defaultValue: false
   }
+  // price at time of checkout
 })
 
 module.exports = OrderProduct

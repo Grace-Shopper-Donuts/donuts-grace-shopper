@@ -23,15 +23,15 @@ class SingleProduct extends React.Component {
     const {name, imgPath, price, description} = this.props.currentProduct
     console.log(imgPath)
     return (
-      <div>
-        <div>
+      <div id="singleProduct">
+        <div id="singleProductLeft">
           <img src={'/' + imgPath} />
         </div>
-        <div>
-          <div>{name}</div>
-          <div>{price}</div>
+        <div id="singleProductRight">
+          <h1>{name}</h1>
+          <h1>{price}</h1>
           <div>{description}</div>
-          <button type="submit" onClick={this.addToCart}>
+          <button type="submit" className="singleProductButton" onClick={this.addToCart}>
             ADD TO CART
           </button>
         </div>

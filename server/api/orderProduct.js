@@ -2,6 +2,8 @@ const router = require('express').Router()
 const {Order, Product, OrderProduct} = require('../db/models')
 module.exports = router
 
+// security
+
 router.get('/', async (req, res, next) => {
   try {
     const orderProducts = await OrderProduct.findAll()

@@ -6,7 +6,11 @@ class HomePage extends React.Component {
   }
 
   render() {
-    return <img src="/homePageTuba.jpg" />
+    return (
+      <div id="homepage">
+        <img src="/homePageTuba.jpg" id="homepageImage" />
+      </div>
+    )
   }
 }
 

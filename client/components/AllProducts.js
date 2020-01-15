@@ -10,7 +10,7 @@ class AllProducts extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="allProducts">
         {this.props.products.map(product => {
           return <ProductThumb key={product.id} product={product} />
         })}
