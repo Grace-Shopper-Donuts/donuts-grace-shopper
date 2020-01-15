@@ -6,6 +6,7 @@ const OrderProduct = db.define('orderProduct', {
     type: Sequelize.INTEGER,
     allowNull: false
   }
+  // price at time of checkout
 })
 
 module.exports = OrderProduct

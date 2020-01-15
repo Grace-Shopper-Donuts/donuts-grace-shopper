@@ -13,6 +13,7 @@ label {
 nav a {
   display: inline-block;
   margin: 1em;
+  color: white;
 }
 
 nav div {
@@ -33,4 +34,119 @@ nav input {
 
 form div {
   display: inline-block;
+}
+
+#navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  width: 100vw;
+  position: fixed;
+  background: grey;
+}
+
+#navRight {
+  padding-right: 3%;
+}
+
+#logoImg {
+  height: 8vh;
+}
+
+#authPage {
+  margin-top: 100px;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#loginForm {
+  margin: 25px;
+}
+
+#homepage {
+  margin-top: -50px;
+  height: 90%;
+}
+
+#homepageImage {
+  width: 100vw;
+}
+
+#accountPage {
+  display: flex;
+  width: 100vw;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 100px;
+}
+
+#orderHistory {
+  margin-top: 100px;
+  display: flex;
+}
+
+#allProducts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 100px;
+}
+
+#singleProduct {
+  margin-top: 30px;
+  padding: 50px;
+  display: flex;
+}
+
+#singleProductLeft {
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#singleProductRight {
+  width: 50vw;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.productThumb {
+  margin: 50px;
+}
+
+.productThumbImg {
+  width: 15vw;
+  max-width: 250px;
+  min-width: 150px;
+}
+
+.productThumbInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.singleProductButton {
+  font-size: 16pt;
+  padding: 15px;
+  border-radius: 12px;
+}
+
+.orderHistoryItem {
+  display: flex;
+  justify-content: space-between;
+  background: grey;
+  color: white;
+  border-radius: 12px;
+  padding: 10px;
+  margin: 10px;
+  width: 50vw;
 }

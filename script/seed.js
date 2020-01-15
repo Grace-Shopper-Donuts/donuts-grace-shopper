@@ -36,17 +36,59 @@ async function seed() {
       name: 'Piano',
       price: 399.99,
       stock: 5
+    }),
+    Product.create({
+      name: 'Drums',
+      price: 349.99,
+      stock: 3
+    }),
+    Product.create({
+      name: 'Tuba',
+      price: 299.99,
+      stock: 7
+    }),
+    Product.create({
+      name: 'Violin',
+      price: 99.99,
+      stock: 6
+    }),
+    Product.create({
+      name: 'Saxophone',
+      price: 249.99,
+      stock: 2
+    }),
+    Product.create({
+      name: 'Trumpet',
+      price: 199.99,
+      stock: 12
+    }),
+    Product.create({
+      name: 'Clarinet',
+      price: 249.99,
+      stock: 27
     })
   ])
 
   const orders = await Promise.all([
     Order.create({
       userId: 1,
-      totalPrice: 499.98
+      totalPrice: 499.98,
+      completed: true
     }),
     Order.create({
       userId: 2,
-      totalPrice: 499.97
+      totalPrice: 499.97,
+      completed: true
+    }),
+    Order.create({
+      userId: 1,
+      totalPrice: 123.45,
+      completed: true
+    }),
+    Order.create({
+      userId: 1,
+      totalPrice: 67.89,
+      completed: false
     })
   ])
 

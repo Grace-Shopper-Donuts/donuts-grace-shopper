@@ -9,7 +9,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
     <nav id="navbar">
       <div id="navLeft">
         <Link to="/">
-          <h1>YouTuba</h1>
+          <img src="/youTuba_logo.png" id="logoImg" />
         </Link>
       </div>
 
@@ -18,7 +18,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         {isLoggedIn ? (
           <div>
             {/* The navbar will show these links after you log in */}
-            <Link to="/home">Home</Link>
+            <Link to="/account">Account</Link>
             <a href="#" onClick={handleClick}>
               Logout
             </a>

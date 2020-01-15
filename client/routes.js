@@ -7,6 +7,8 @@ import AllProductsContainer from './components/AllProducts'
 import {me} from './store'
 import SingleProduct from './components/SingleProduct'
 import HomePage from './components/HomePage'
+import AccountPage from './components/AccountPage'
+import OrderHistory from './components/OrderHistory'
 
 /**
  * COMPONENT
@@ -30,7 +32,8 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
+            <Route path="/account" component={AccountPage} />
+            <Route path="/orderHistory" component={OrderHistory} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
