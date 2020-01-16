@@ -1,6 +1,6 @@
 import React from 'react'
 
-const OrderHistoryItem = props => {
+export const OrderHistoryItem = props => {
   const {order} = props
   return (
     <div className="orderHistoryItem">

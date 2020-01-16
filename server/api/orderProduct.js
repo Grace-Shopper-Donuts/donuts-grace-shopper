@@ -1,13 +1,20 @@
 const router = require('express').Router()
-const {Order, Product, OrderProduct} = require('../db/models')
+const {Order, Product, OrderProduct, User} = require('../db/models')
 module.exports = router
 
 // security
 
 router.get('/', async (req, res, next) => {
   try {
-    const orderProducts = await OrderProduct.findAll()
-    res.json(orderProducts)
+    let currentUser
+    if (req.user) currentUser = await User.findByPk(req.user.id)
+
+    if (currentUser && currentUser.isAdmin) {
+      const orderProducts = await OrderProduct.findAll()
+      res.json(orderProducts)
+    } else {
+      res.sendStatus(401)
+    }
   } catch (err) {
     next(err)
   }
