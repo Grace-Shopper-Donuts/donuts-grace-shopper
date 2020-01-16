@@ -1,6 +1,10 @@
 import React from 'React'
 import {connect} from 'react-redux'
-import {getCartProducts} from '../store/reducers/orderProducts'
+import {
+  getCartProducts,
+  deleteCartProduct,
+  updateCartProductQuantity
+} from '../store/reducers/orderProducts'
 import CartProduct from './CartProduct'
 import {Link} from 'react-router-dom'
 
@@ -10,12 +14,23 @@ class CartList extends React.Component {
   }
 
   render() {
-    const {cartProducts} = this.props
+    const {
+      cartProducts,
+      deleteCartProduct,
+      updateCartProductQuantity
+    } = this.props
     return (
       <div id="cartListPage">
         <div id="cartListLeft">
           {cartProducts.map(product => {
-            return <CartProduct key={product.productId} product={product} />
+            return (
+              <CartProduct
+                key={product.productId}
+                product={product}
+                deleteCartProduct={deleteCartProduct}
+                updateCartProductQuantity={updateCartProductQuantity}
+              />
+            )
           })}
         </div>
         <div id="cartListRight">
@@ -44,7 +59,11 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getCartProducts: () => dispatch(getCartProducts())
+    getCartProducts: () => dispatch(getCartProducts()),
+    deleteCartProduct: (productId, orderId) =>
+      dispatch(deleteCartProduct(productId, orderId)),
+    updateCartProductQuantity: (productId, orderId, newQuantity) =>
+      dispatch(updateCartProductQuantity(productId, orderId, newQuantity))
   }
 }
 

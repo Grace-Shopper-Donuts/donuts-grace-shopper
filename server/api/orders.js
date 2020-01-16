@@ -35,7 +35,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.get('/user/:userId', async (req, res, next) => {
   try {
-    if (req.user && req.user.id === req.params.userId) {
+    if (req.user && req.user.id === Number(req.params.userId)) {
       const orders = await Order.findAll({
         where: {
           userId: req.params.userId

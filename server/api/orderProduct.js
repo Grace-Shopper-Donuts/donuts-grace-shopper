@@ -2,8 +2,6 @@ const router = require('express').Router()
 const {Order, Product, OrderProduct, User} = require('../db/models')
 module.exports = router
 
-// security
-
 router.get('/', async (req, res, next) => {
   try {
     let currentUser
@@ -41,17 +39,6 @@ router.get('/cart', async (req, res, next) => {
       ]
     })
     res.send(cartProducts)
-  } catch (err) {
-    next(err)
-  }
-})
-
-router.get('/:id', async (req, res, next) => {
-  try {
-    const orderProduct = await OrderProduct.findByPk(req.params.id, {
-      include: [{model: Order}]
-    })
-    res.json(orderProduct)
   } catch (err) {
     next(err)
   }
@@ -113,5 +100,38 @@ router.post('/cart', async (req, res, next) => {
     }
   } catch (err) {
     next(err)
+  }
+})
+
+router.delete('/order/:orderId/:productId', async (req, res, next) => {
+  try {
+    const {productId, orderId} = req.params
+    console.log('PRODUCT ID', productId)
+    await OrderProduct.destroy({
+      where: {
+        productId: productId,
+        orderId: orderId
+      }
+    })
+    res.sendStatus(200)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.put('/cart', async (req, res, next) => {
+  try {
+    const {productId, orderId, newQuantity} = req.body
+    const orderProduct = await OrderProduct.findOne({
+      where: {
+        productId: productId,
+        orderId: orderId
+      }
+    })
+    await orderProduct.update({
+      quantity: newQuantity
+    })
+  } catch (error) {
+    console.log(error)
   }
 })

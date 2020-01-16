@@ -9,4 +9,10 @@ const OrderProduct = db.define('orderProduct', {
   // price at time of checkout
 })
 
+OrderProduct.beforeUpdate(entry => {
+  if (entry.quantity === 0) {
+    entry.destroy()
+  }
+})
+
 module.exports = OrderProduct

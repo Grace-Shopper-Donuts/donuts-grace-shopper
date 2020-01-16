@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+let initialState = []
+
 const ADD_ORDER_PRODUCT = 'ADD_ORDER_PRODUCT'
 const GOT_CART_PRODUCTS = 'GOT_CART_PRODUCTS '
 
@@ -21,9 +23,9 @@ export const addOrderProductToCart = productId => {
   }
 }
 
-const gotCartProducts = cartProducts => ({
+const gotCartProducts = orderProducts => ({
   type: GOT_CART_PRODUCTS,
-  cartProducts
+  orderProducts
 })
 
 export const getCartProducts = () => {
@@ -37,14 +39,39 @@ export const getCartProducts = () => {
   }
 }
 
-var initialState = []
+export const deleteCartProduct = (productId, orderId) => {
+  return async dispatch => {
+    try {
+      await axios.delete(`/api/orderProduct/order/${orderId}/${productId}`)
+      dispatch(getCartProducts())
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const updateCartProductQuantity = (productId, orderId, newQuantity) => {
+  return async dispatch => {
+    console.log(productId, orderId, newQuantity)
+    try {
+      await axios.put('/api/orderProduct/cart', {
+        productId,
+        orderId,
+        newQuantity
+      })
+      dispatch(getCartProducts())
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case ADD_ORDER_PRODUCT:
       return state.concat(action.product)
     case GOT_CART_PRODUCTS:
-      return action.cartProducts
+      return action.orderProducts
     default:
       return state
   }
