@@ -6,15 +6,15 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    let currentUser
-    if (req.user) currentUser = await User.findByPk(req.user.id)
+    // let currentUser
+    // if (req.user) currentUser = await User.findByPk(req.user.id)
 
-    if (currentUser && currentUser.isAdmin) {
-      const orderProducts = await OrderProduct.findAll()
-      res.json(orderProducts)
-    } else {
-      res.sendStatus(401)
-    }
+    // if (currentUser && currentUser.isAdmin) {
+    const orderProducts = await OrderProduct.findAll()
+    res.json(orderProducts)
+    // } else {
+    // res.sendStatus(401)
+    // }
   } catch (err) {
     next(err)
   }

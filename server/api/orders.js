@@ -5,14 +5,14 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     //we have to check if the user is admin after we put the isAdmin property on the model
-    let user
-    if (req.user) user = await User.findByPk(req.user.id)
-    if (user && user.isAdmin) {
-      const orders = await Order.findAll()
-      res.json(orders)
-    } else {
-      res.sendStatus(401)
-    }
+    // let user
+    // if (req.user) user = await User.findByPk(req.user.id)
+    // if (user && user.isAdmin) {
+    const orders = await Order.findAll()
+    res.json(orders)
+    // } else {
+    // res.sendStatus(401)
+    // }
   } catch (err) {
     next(err)
   }
@@ -23,11 +23,11 @@ router.get('/:id', async (req, res, next) => {
     const order = await Order.findByPk(req.params.id, {
       include: [{model: Product}]
     })
-    if (req.user && req.user.id === order.userId) {
-      res.json(order)
-    } else {
-      res.sendStatus(401)
-    }
+    // if (req.user && req.user.id === order.userId) {
+    res.json(order)
+    // } else {
+    //   res.sendStatus(401)
+    // }
   } catch (err) {
     next(err)
   }

@@ -31,6 +31,8 @@ const orders = (state = initialState, action) => {
   switch (action.type) {
     case GOT_PAST_ORDERS:
       return action.orders
+    case ADD_TO_CART:
+      return state
     default:
       return state
   }
