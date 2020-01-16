@@ -7,10 +7,7 @@ const {Order} = require('../server/db/models')
 const {OrderProduct} = require('../server/db/models')
 
 async function seed() {
-  await db
-    .sync
-    // {force: true}
-    ()
+  await db.sync({force: true})
 
   console.log('db synced!')
 
