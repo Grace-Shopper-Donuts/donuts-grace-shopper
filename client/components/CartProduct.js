@@ -1,9 +1,12 @@
 import React from 'react'
 
 export const CartProduct = props => {
-  let {product} = props
+  let {product, deleteCartProduct, updateCartProductQuantity} = props
   const orderProduct = product
+  const {productId, orderId} = orderProduct
   product = product.product
+
+  console.log(productId, orderId)
 
   return (
     <div className="cartProduct">
@@ -11,9 +14,36 @@ export const CartProduct = props => {
       <h2>{product.name}</h2>
       <h2>Quantity: {orderProduct.quantity}</h2>
       <div>
-        <button>-</button>
-        <button>+</button>
-        <button>X</button>
+        <button
+          type="button"
+          onClick={() =>
+            updateCartProductQuantity(
+              productId,
+              orderId,
+              orderProduct.quantity - 1
+            )
+          }
+        >
+          -
+        </button>
+        <button
+          type="button"
+          onClick={() =>
+            updateCartProductQuantity(
+              productId,
+              orderId,
+              orderProduct.quantity + 1
+            )
+          }
+        >
+          +
+        </button>
+        <button
+          type="button"
+          onClick={() => deleteCartProduct(productId, orderId)}
+        >
+          X
+        </button>
       </div>
     </div>
   )
