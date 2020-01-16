@@ -6,10 +6,15 @@ const CartProduct = props => {
   product = product.product
 
   return (
-    <div>
+    <div className="cartProduct">
       <img src={product.imgPath} />
       <h2>{product.name}</h2>
       <h2>Quantity: {orderProduct.quantity}</h2>
+      <div>
+        <button>-</button>
+        <button>+</button>
+        <button>X</button>
+      </div>
     </div>
   )
 }

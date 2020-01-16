@@ -41,6 +41,10 @@ router.put('/checkout', async (req, res, next) => {
     await order.update({
       completed: true
     })
+    await Order.create({
+      userId: req.body.userId,
+      completed: false
+    })
     res.sendStatus(204)
   } catch (err) {
     next(err)
