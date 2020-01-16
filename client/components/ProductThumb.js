@@ -1,8 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-export const ProductThumb = props => {
-  const {product} = props
+const ProductThumb = props => {
+  const {product, addToCart} = props
 
   return (
     <div className="productThumb">
@@ -13,8 +13,8 @@ export const ProductThumb = props => {
         <Link to={`/products/${product.id}`}>
           <div>{product.name}</div>
         </Link>
-        <div>{product.price}</div>
-        <button>ADD TO CART</button>
+        <div>$ {product.price / 100}</div>
+        <button onClick={addToCart}>ADD TO CART</button>
       </div>
     </div>
   )

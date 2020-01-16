@@ -26,7 +26,7 @@ class OrderHistory extends React.Component {
           </h1>
           <h2>Number of Orders: {orders.length}</h2>
           <h2>
-            Total Spending:{' '}
+            Total Spending:
             {orders
               .reduce((a, b) => Number(a) + Number(b.totalPrice), 0)
               .toFixed(2)}

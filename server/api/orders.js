@@ -47,3 +47,19 @@ router.get('/user/:userId', async (req, res, next) => {
     next(err)
   }
 })
+
+router.put('/checkout', async (req, res, next) => {
+  try {
+    const order = await Order.findByPk(req.body.orderId)
+    await order.update({
+      completed: true
+    })
+    await Order.create({
+      userId: req.body.userId,
+      completed: false
+    })
+    res.sendStatus(204)
+  } catch (err) {
+    next(err)
+  }
+})

@@ -10,6 +10,7 @@ import HomePage from './components/HomePage'
 import AccountPage from './components/AccountPage'
 import OrderHistory from './components/OrderHistory'
 import CartList from './components/CartList'
+import CheckoutPage from './components/CheckoutPage'
 
 /**
  * COMPONENT
@@ -31,6 +32,7 @@ class Routes extends Component {
         <Route exact path="/cart" component={CartList} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route path="/checkout" component={CheckoutPage} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}

@@ -7,9 +7,8 @@ const Product = db.define('product', {
     allowNull: false
   },
   price: {
-    type: Sequelize.DECIMAL,
+    type: Sequelize.INTEGER,
     allowNull: false
-    // use integer type (use)
   },
   stock: {
     type: Sequelize.INTEGER,
@@ -25,6 +24,10 @@ const Product = db.define('product', {
     allowNull: false,
     defaultValue: 'default.jpg'
   }
+})
+
+Product.beforeValidate((product, options) => {
+  product.price = product.price * 100
 })
 
 module.exports = Product

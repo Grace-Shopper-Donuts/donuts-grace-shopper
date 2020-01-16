@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const ADD_ORDER_PRODUCT = 'ADD_ORDER_PRODUCT'
-const GET_CART_PRODUCTS = 'GET_CART_PRODUCTS '
+const GOT_CART_PRODUCTS = 'GOT_CART_PRODUCTS '
 
 const addedProduct = product => ({
   type: ADD_ORDER_PRODUCT,
@@ -22,7 +22,7 @@ export const addOrderProductToCart = productId => {
 }
 
 const gotCartProducts = cartProducts => ({
-  type: GET_CART_PRODUCTS,
+  type: GOT_CART_PRODUCTS,
   cartProducts
 })
 
@@ -43,7 +43,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case ADD_ORDER_PRODUCT:
       return state.concat(action.product)
-    case GET_CART_PRODUCTS:
+    case GOT_CART_PRODUCTS:
       return action.cartProducts
     default:
       return state

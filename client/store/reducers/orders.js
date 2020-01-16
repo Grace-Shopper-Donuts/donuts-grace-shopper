@@ -11,11 +11,19 @@ const gotPastOrders = orders => {
   }
 }
 
-export const getPastOrders = id => {
+export const getPastOrders = userId => {
   return async dispatch => {
-    let {data} = await axios.get(`/api/orders/user/${id}`)
+    let {data} = await axios.get(`/api/orders/user/${userId}`)
     data = data.filter(order => order.completed)
+    console.log(data)
     dispatch(gotPastOrders(data))
+  }
+}
+
+export const checkoutCart = (orderId, userId) => {
+  return async dispatch => {
+    await axios.put(`/api/orders/checkout`, {orderId, userId})
+    dispatch(getPastOrders(userId))
   }
 }
 
