@@ -2,6 +2,7 @@ import React from 'React'
 import {connect} from 'react-redux'
 import {getCartProducts} from '../store/reducers/orderProducts'
 import CartProduct from './CartProduct'
+import {Link} from 'react-router-dom'
 
 class CartList extends React.Component {
   componentDidMount() {
@@ -11,10 +12,17 @@ class CartList extends React.Component {
   render() {
     const {cartProducts} = this.props
     return (
-      <div>
-        {cartProducts.map(product => {
-          return <CartProduct key={product.productId} product={product} />
-        })}
+      <div id="cartListPage">
+        <div id="cartListLeft">
+          {cartProducts.map(product => {
+            return <CartProduct key={product.productId} product={product} />
+          })}
+        </div>
+        <div id="cartListRight">
+          <Link to="/checkout">
+            <button type="button">Proceed to Checkout</button>
+          </Link>
+        </div>
       </div>
     )
   }

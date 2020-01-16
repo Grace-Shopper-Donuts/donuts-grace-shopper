@@ -5,8 +5,6 @@ const CartProduct = props => {
   const orderProduct = product
   product = product.product
 
-  console.log(product)
-
   return (
     <div>
       <img src={product.imgPath} />

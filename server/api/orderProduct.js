@@ -16,7 +16,7 @@ router.get('/', async (req, res, next) => {
 router.get('/cart', async (req, res, next) => {
   try {
     const id = req.user.id
-    let currentOrder = await Order.findAll({
+    let currentOrder = await Order.findOrCreate({
       where: {
         userId: id,
         completed: false
@@ -74,15 +74,12 @@ router.post('/cart', async (req, res, next) => {
     if (existingOrder) {
       existingOrder = existingOrder[0]
     }
-    console.log(existingOrder)
     if (!existingOrder) {
       existingOrder = await Order.create({
         userId: req.user.id,
         completed: false
       })
     }
-    console.log(existingOrder)
-    console.log(req.body)
     try {
       var existingOrderProduct = await OrderProduct.findAll({
         where: {
@@ -107,25 +104,6 @@ router.post('/cart', async (req, res, next) => {
         completed: false
       })
     }
-  } catch (err) {
-    next(err)
-  }
-})
-
-router.get('/cart', async (req, res, next) => {
-  try {
-    const cartProducts = await OrderProduct.findAll({
-      where: {
-        userId: req.user,
-        completed: false
-      },
-      include: [
-        {
-          model: Product
-        }
-      ]
-    })
-    res.send(cartProducts)
   } catch (err) {
     next(err)
   }

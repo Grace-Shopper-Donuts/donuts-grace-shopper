@@ -29,9 +29,13 @@ class SingleProduct extends React.Component {
         </div>
         <div id="singleProductRight">
           <h1>{name}</h1>
-          <h1>{price}</h1>
+          <h1>$ {price / 100}</h1>
           <div>{description}</div>
-          <button type="submit" className="singleProductButton" onClick={this.addToCart}>
+          <button
+            type="submit"
+            className="singleProductButton"
+            onClick={this.addToCart}
+          >
             ADD TO CART
           </button>
         </div>
