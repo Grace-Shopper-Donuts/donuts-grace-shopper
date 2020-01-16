@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-const ProductThumb = props => {
+export const ProductThumb = props => {
   const {product} = props
 
   return (

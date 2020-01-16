@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CartProduct = props => {
+export const CartProduct = props => {
   let {product} = props
   const orderProduct = product
   product = product.product
