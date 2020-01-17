@@ -27,9 +27,9 @@ class CheckoutPage extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    const {user, cartProducts} = this.props
-    this.props.checkoutCart(cartProducts[0].orderId, user.id)
-    this.props.getCartProducts()
+    const {user, cartProducts, checkoutCart, getCartProducts} = this.props
+    checkoutCart(cartProducts[0].orderId, user.id, cartProducts)
+    getCartProducts()
   }
 
   render() {
@@ -92,7 +92,8 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     getCartProducts: () => dispatch(getCartProducts()),
-    checkoutCart: (orderId, userId) => dispatch(checkoutCart(orderId, userId))
+    checkoutCart: (orderId, userId, cartProducts) =>
+      dispatch(checkoutCart(orderId, userId, cartProducts))
   }
 }
 

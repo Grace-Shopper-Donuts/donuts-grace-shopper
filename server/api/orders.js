@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Order, Product, User} = require('../db/models')
+const {Order, Product, User, OrderProduct} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -50,12 +50,19 @@ router.get('/user/:userId', async (req, res, next) => {
 
 router.put('/checkout', async (req, res, next) => {
   try {
-    const order = await Order.findByPk(req.body.orderId)
+    const {orderId, userId, cartProducts} = req.body
+    const order = await Order.findByPk(orderId)
+    cartProducts.forEach(async orderProduct => {
+      const product = orderProduct.product
+      await orderProduct.update({
+        checkoutPrice: product.price
+      })
+    })
     await order.update({
       completed: true
     })
     await Order.create({
-      userId: req.body.userId,
+      userId: userId,
       completed: false
     })
     res.sendStatus(200)

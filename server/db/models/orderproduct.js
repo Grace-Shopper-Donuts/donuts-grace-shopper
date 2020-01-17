@@ -5,6 +5,9 @@ const OrderProduct = db.define('orderProduct', {
   quantity: {
     type: Sequelize.INTEGER,
     allowNull: false
+  },
+  checkoutPrice: {
+    type: Sequelize.INTEGER
   }
   // price at time of checkout
 })
