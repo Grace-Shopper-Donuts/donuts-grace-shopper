@@ -13,14 +13,29 @@ const addedProduct = product => ({
 export const addOrderProductToCart = productId => {
   return async dispatch => {
     try {
-      const newOrderProduct = await axios.post('/api/orderProduct/cart', {
+      const {data} = await axios.post('/api/orderProduct/cart', {
         productId
       })
-      dispatch(addedProduct(newOrderProduct))
+      dispatch(addedProduct(data))
+      dispatch(getCartProducts())
     } catch (err) {
       console.log(err)
     }
   }
+}
+
+export const addGuestProductToCart = product => {
+  var cartProducts = JSON.parse(localStorage.getItem('cartProducts')) || {}
+  console.log(cartProducts)
+  cartProducts = {...cartProducts}
+  if (cartProducts[product.id]) {
+    cartProducts[product.id].quantity += 1
+  } else {
+    cartProducts[product.id.toString()] = product
+  }
+  localStorage.setItem('cartProducts', JSON.stringify(cartProducts))
+  console.log(localStorage.getItem('cartProducts'))
+  return addedGuestProduct(product)
 }
 
 const gotCartProducts = cartProducts => ({
@@ -52,7 +67,6 @@ export const deleteCartProduct = (productId, orderId) => {
 
 export const updateCartProductQuantity = (productId, orderId, newQuantity) => {
   return async dispatch => {
-    console.log(productId, orderId, newQuantity)
     try {
       await axios.put('/api/orderProduct/cart', {
         productId,
@@ -69,7 +83,7 @@ export const updateCartProductQuantity = (productId, orderId, newQuantity) => {
 export default (state = initialState, action) => {
   switch (action.type) {
     case ADD_ORDER_PRODUCT:
-      return state.concat(action.product)
+      return [...state, action.product]
     case GOT_CART_PRODUCTS:
       return action.cartProducts
     default:
