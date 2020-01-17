@@ -67,47 +67,40 @@ router.get('/order/:orderId', async (req, res, next) => {
 
 router.post('/cart', async (req, res, next) => {
   try {
-    var existingOrder = await Order.findAll({
+    // find the users cart
+
+    let cart = await Order.findOrCreate({
       where: {
         userId: req.user.id,
         completed: false
       }
     })
-    if (existingOrder) {
-      existingOrder = existingOrder[0]
-    }
-    if (!existingOrder) {
-      existingOrder = await Order.create({
-        userId: req.user.id,
-        completed: false
-      })
-    }
-    try {
-      var existingOrderProduct = await OrderProduct.findAll({
-        where: {
-          orderId: existingOrder.id,
-          productId: req.body.productId
-        }
-      })
-      if (existingOrderProduct) {
-        existingOrderProduct = existingOrderProduct[0]
+
+    // see if the product being added already exists
+
+    let cartProduct = await OrderProduct.findAll({
+      where: {
+        orderId: cart[0].dataValues.id,
+        productId: req.body.productId
       }
-    } catch (err) {
-      next(err)
+    })
+
+    // if it exists increment the quantity
+
+    if (cartProduct.length) {
+      cartProduct = cartProduct[0]
+      await cartProduct.update({
+        quantity: cartProduct.dataValues.quantity + 1
+      })
+    } else {
+      cartProduct = await OrderProduct.create({
+        orderId: cart[0].dataValues.id,
+        productId: req.body.productId,
+        quantity: 1
+      })
     }
 
-    if (existingOrderProduct) {
-      existingOrderProduct.quantity = existingOrderProduct.quantity + 1
-    } else {
-      await OrderProduct.create({
-        userId: req.user.id,
-        orderId: existingOrder.dataValues.id,
-        quantity: 1,
-        productId: req.body.productId,
-        completed: false
-      })
-    }
-    res.sendStatus(200)
+    res.send(cartProduct.dataValues)
   } catch (err) {
     next(err)
   }
@@ -118,7 +111,6 @@ router.post('/cart', async (req, res, next) => {
 router.delete('/order/:orderId/:productId', async (req, res, next) => {
   try {
     const {productId, orderId} = req.params
-    console.log('PRODUCT ID', productId)
     await OrderProduct.destroy({
       where: {
         productId: productId,

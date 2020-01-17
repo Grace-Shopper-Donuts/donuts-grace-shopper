@@ -26,7 +26,7 @@ const Product = db.define('product', {
   }
 })
 
-Product.beforeValidate((product, options) => {
+Product.beforeValidate(product => {
   product.price = product.price * 100
 })
 
