@@ -23,9 +23,9 @@ export const addOrderProductToCart = productId => {
   }
 }
 
-const gotCartProducts = orderProducts => ({
+const gotCartProducts = cartProducts => ({
   type: GOT_CART_PRODUCTS,
-  orderProducts
+  cartProducts
 })
 
 export const getCartProducts = () => {
@@ -71,7 +71,7 @@ export default (state = initialState, action) => {
     case ADD_ORDER_PRODUCT:
       return state.concat(action.product)
     case GOT_CART_PRODUCTS:
-      return action.orderProducts
+      return action.cartProducts
     default:
       return state
   }
