@@ -38,7 +38,7 @@ class CheckoutPage extends React.Component {
     return (
       <form onSubmit={this.handleSubmit} id="checkoutPage">
         <div id="checkoutPageLeft">
-          <div>
+          <div id="checkoutShippingInfo">
             <h2>Shipping Adress</h2>
             <label htmlFor="address">Address:</label>
             <input
@@ -48,11 +48,16 @@ class CheckoutPage extends React.Component {
               onChange={this.handleChange}
             />
           </div>
-          <div>
+          <div id="checkoutPaymentInfo">
             <h2>Payment Method</h2>
           </div>
-          <div>
+          <div id="checkoutReviewOrder">
             <h2>Review Items</h2>
+            <ol>
+              {cartProducts.map(product => {
+                return <li>{product.product.name}</li>
+              })}
+            </ol>
           </div>
         </div>
         <div id="checkoutPageRight">
