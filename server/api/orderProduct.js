@@ -107,6 +107,7 @@ router.post('/cart', async (req, res, next) => {
         completed: false
       })
     }
+    res.sendStatus(200)
   } catch (err) {
     next(err)
   }

@@ -11,9 +11,9 @@ const ProductThumb = props => {
       </Link>
       <div className="productThumbInfo">
         <Link to={`/products/${product.id}`}>
-          <div>{product.name}</div>
+          <h3>{product.name}</h3>
         </Link>
-        <div>$ {product.price / 100}</div>
+        <p>$ {product.price / 100}</p>
         <button onClick={addToCart}>ADD TO CART</button>
       </div>
     </div>

@@ -34,11 +34,15 @@ class CartList extends React.Component {
           })}
         </div>
         <div id="cartListRight">
-          <h2>Number of items: {cartProducts.length}</h2>
+          <h2>
+            Number of items:{' '}
+            {cartProducts.reduce((a, b) => Number(a) + Number(b.quantity), 0)}
+          </h2>
           <h2>
             Order Total:{' '}
             {cartProducts.reduce(
-              (a, b) => Number(a) + Number(b.product.price),
+              (a, b) =>
+                Number(a) + Number(b.product.price) * Number(b.quantity),
               0
             ) / 100}
           </h2>

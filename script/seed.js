@@ -32,42 +32,50 @@ async function seed() {
     Product.create({
       name: 'Guitar',
       price: 99.99,
-      stock: 1
+      stock: 1,
+      imgPath: 'images/productImages/electricGuitar.jpg'
     }),
     Product.create({
       name: 'Piano',
       price: 399.99,
-      stock: 5
+      stock: 5,
+      imgPath: 'images/productImages/piano.jpg'
     }),
     Product.create({
       name: 'Drums',
       price: 349.99,
-      stock: 3
+      stock: 3,
+      imgPath: 'images/productImages/drums.jpg'
     }),
     Product.create({
       name: 'Tuba',
       price: 299.99,
-      stock: 7
+      stock: 7,
+      imgPath: 'images/productImages/tuba.jpg'
     }),
     Product.create({
       name: 'Violin',
       price: 99.99,
-      stock: 6
+      stock: 6,
+      imgPath: 'images/productImages/violin.jpg'
     }),
     Product.create({
       name: 'Saxophone',
       price: 249.99,
-      stock: 2
+      stock: 2,
+      imgPath: 'images/productImages/saxophone.jpg'
     }),
     Product.create({
       name: 'Trumpet',
       price: 199.99,
-      stock: 12
+      stock: 12,
+      imgPath: 'images/productImages/trumpet.jpg'
     }),
     Product.create({
       name: 'Clarinet',
       price: 249.99,
-      stock: 27
+      stock: 27,
+      imgPath: 'images/productImages/clarinet.jpg'
     })
   ])
 

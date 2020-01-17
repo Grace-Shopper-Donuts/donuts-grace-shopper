@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 export const CartProduct = props => {
   let {product, deleteCartProduct, updateCartProductQuantity} = props
@@ -10,7 +11,9 @@ export const CartProduct = props => {
 
   return (
     <div className="cartProduct">
-      <img src={product.imgPath} />
+      <Link to={`/products/${productId}`}>
+        <img src={product.imgPath} />
+      </Link>
       <h2>{product.name}</h2>
       <h2>Quantity: {orderProduct.quantity}</h2>
       <div>
