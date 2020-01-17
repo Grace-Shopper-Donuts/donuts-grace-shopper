@@ -2,6 +2,8 @@ const router = require('express').Router()
 const {Order, Product, OrderProduct, User} = require('../db/models')
 module.exports = router
 
+//get all order products
+
 router.get('/', async (req, res, next) => {
   try {
     let currentUser
@@ -17,6 +19,8 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+//get all order products in current user's cart
 
 router.get('/cart', async (req, res, next) => {
   try {
@@ -44,6 +48,8 @@ router.get('/cart', async (req, res, next) => {
   }
 })
 
+// get all items from an order
+
 router.get('/order/:orderId', async (req, res, next) => {
   try {
     const orderProducts = await OrderProduct.findAll({
@@ -56,6 +62,8 @@ router.get('/order/:orderId', async (req, res, next) => {
     next(err)
   }
 })
+
+// below route needs clarification
 
 router.post('/cart', async (req, res, next) => {
   try {
@@ -87,6 +95,7 @@ router.post('/cart', async (req, res, next) => {
     } catch (err) {
       next(err)
     }
+
     if (existingOrderProduct) {
       existingOrderProduct.quantity = existingOrderProduct.quantity + 1
     } else {
@@ -102,6 +111,8 @@ router.post('/cart', async (req, res, next) => {
     next(err)
   }
 })
+
+// delete an item from the cart
 
 router.delete('/order/:orderId/:productId', async (req, res, next) => {
   try {
@@ -119,6 +130,8 @@ router.delete('/order/:orderId/:productId', async (req, res, next) => {
   }
 })
 
+// update the quantity of a cart item
+
 router.put('/cart', async (req, res, next) => {
   try {
     const {productId, orderId, newQuantity} = req.body
@@ -131,6 +144,7 @@ router.put('/cart', async (req, res, next) => {
     await orderProduct.update({
       quantity: newQuantity
     })
+    res.sendStatus(200)
   } catch (error) {
     console.log(error)
   }

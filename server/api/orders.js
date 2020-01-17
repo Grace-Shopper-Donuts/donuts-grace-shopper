@@ -58,7 +58,7 @@ router.put('/checkout', async (req, res, next) => {
       userId: req.body.userId,
       completed: false
     })
-    res.sendStatus(204)
+    res.sendStatus(200)
   } catch (err) {
     next(err)
   }
