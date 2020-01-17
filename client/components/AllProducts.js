@@ -2,7 +2,7 @@ import React from 'React'
 import ProductThumb from './ProductThumb'
 import {connect} from 'react-redux'
 import {getAllProducts} from '../store/reducers/allProducts'
-import {addOrderProductToCart} from '../store/reducers/orderProducts'
+import {addOrderProductToCart} from '../store/reducers/cartProducts'
 
 class AllProducts extends React.Component {
   componentDidMount() {

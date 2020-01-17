@@ -1,7 +1,7 @@
 import React from 'React'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {getCartProducts} from '../store/reducers/orderProducts'
+import {getCartProducts} from '../store/reducers/cartProducts'
 import {checkoutCart} from '../store/reducers/orders'
 
 class CheckoutPage extends React.Component {
@@ -84,7 +84,7 @@ class CheckoutPage extends React.Component {
 
 const mapState = state => {
   return {
-    cartProducts: state.orderProducts,
+    cartProducts: state.cartProducs,
     user: state.user
   }
 }
