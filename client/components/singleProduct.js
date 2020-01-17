@@ -2,7 +2,11 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {getSingleProduct} from '../store/reducers/singleProduct'
-import {addOrderProductToCart} from '../store/reducers/orderProducts'
+import {
+  addOrderProductToCart,
+  addGuestProductToCart,
+  getGuestCartProducts
+} from '../store/reducers/orderProducts'
 
 class SingleProduct extends React.Component {
   constructor(props) {
@@ -16,7 +20,13 @@ class SingleProduct extends React.Component {
 
   addToCart() {
     event.preventDefault()
-    this.props.addOrderProductToCart()
+    console.log(this.props.isLoggedIn)
+    if (this.props.isLoggedIn) {
+      this.props.addOrderProductToCart()
+    } else {
+      console.log(addGuestProductToCart(this.props.currentProduct))
+      addGuestProductToCart(this.props.currentProduct)
+    }
   }
 
   render() {
@@ -48,7 +58,8 @@ class SingleProduct extends React.Component {
  */
 const mapState = state => {
   return {
-    currentProduct: state.singleProduct
+    currentProduct: state.singleProduct,
+    isLoggedIn: !!state.user.id
   }
 }
 
@@ -56,7 +67,9 @@ const mapDispatch = (dispatch, ownProps) => {
   const id = ownProps.match.params.id
   return {
     getSingleProduct: () => dispatch(getSingleProduct(id)),
-    addOrderProductToCart: () => dispatch(addOrderProductToCart(id))
+    addOrderProductToCart: () => dispatch(addOrderProductToCart(id)),
+    getGuestCartProducts: () => dispatch(getGuestCartProducts()),
+    addGuestProductToCart: product => dispatch(addGuestProductToCart(product))
   }
 }
 

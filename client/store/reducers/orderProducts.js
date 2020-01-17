@@ -3,24 +3,17 @@ import axios from 'axios'
 let initialState = []
 
 const ADD_ORDER_PRODUCT = 'ADD_ORDER_PRODUCT'
-const GOT_CART_PRODUCTS = 'GOT_CART_PRODUCTS '
+const GOT_CART_PRODUCTS = 'GOT_CART_PRODUCTS'
 
 const addedProduct = product => ({
   type: ADD_ORDER_PRODUCT,
   product
 })
 
-export const addOrderProductToCart = productId => {
-  return async dispatch => {
-    try {
-      const {data} = await axios.post('/api/orderProduct/cart', {
-        productId
-      })
-      dispatch(addedProduct(data))
-      dispatch(getCartProducts())
-    } catch (err) {
-      console.log(err)
-    }
+export const addedGuestProduct = product => {
+  return {
+    type: ADD_ORDER_PRODUCT,
+    product
   }
 }
 
@@ -38,6 +31,20 @@ export const addGuestProductToCart = product => {
   return addedGuestProduct(product)
 }
 
+export const addOrderProductToCart = productId => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.post('/api/orderProduct/cart', {
+        productId
+      })
+      dispatch(addedProduct(data))
+      dispatch(getCartProducts())
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
 const gotCartProducts = cartProducts => ({
   type: GOT_CART_PRODUCTS,
   cartProducts
@@ -52,6 +59,11 @@ export const getCartProducts = () => {
       console.log(err)
     }
   }
+}
+
+export const getGuestCartProducts = () => {
+  const products = localStorage.getItem('cartProducts') || {}
+  return gotCartProducts(products)
 }
 
 export const deleteCartProduct = (productId, orderId) => {
