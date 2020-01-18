@@ -55,6 +55,7 @@ form div {
   padding-right: 3%;
   width: 500px;
   justify-content: space-between;
+  align-items: center;
 }
 
 #navRight a {
@@ -268,6 +269,28 @@ form div {
   justify-content: space-between;
   align-items: center;
   width: 500px;
+}
+
+.cartIcon {
+  height: 30px;
+  width: 30px;
+}
+
+.cartIconAndCount {
+  display: flex;
+  justify-content: space-around;
+  width: 65px;
+}
+
+.cartCount {
+  color: white;
+  background: black;
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .productThumb {
