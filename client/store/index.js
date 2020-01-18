@@ -7,13 +7,15 @@ import singleProduct from './reducers/singleProduct'
 import allProducts from './reducers/allProducts'
 import orders from './reducers/orders'
 import orderProducts from './reducers/orderProducts'
+import cartProducts from './reducers/cartProducts'
 
 const reducer = combineReducers({
   user,
   singleProduct,
   allProducts,
   orderProducts,
-  orders,
+  cartProducts,
+  orders
 })
 
 const middleware = composeWithDevTools(

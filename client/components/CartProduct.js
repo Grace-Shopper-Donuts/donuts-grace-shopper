@@ -7,8 +7,6 @@ export const CartProduct = props => {
   const {productId, orderId} = orderProduct
   product = product.product
 
-  console.log(productId, orderId)
-
   return (
     <div className="cartProduct">
       <Link to={`/products/${productId}`}>
