@@ -1,9 +1,21 @@
 body {
-  font-family: sans-serif;
+  font-family: Helvetica Narrow, sans-serif;
 }
 
 a {
   text-decoration: none;
+}
+
+h1 {
+  font-weight: lighter;
+}
+
+h2 {
+  font-weight: lighter;
+}
+
+h3 {
+  font-weight: lighter;
 }
 
 label {
@@ -34,7 +46,8 @@ form div {
   position: fixed;
   top: 0px;
   left: 0px;
-  border-bottom: 1px solid rgb(145, 145, 145);
+  border-bottom: 1px solid lightgrey;
+  background: white;
 }
 
 #navRight {
@@ -47,6 +60,12 @@ form div {
 #navRight a {
   text-decoration: none;
   color: black;
+}
+
+#navRight a:hover {
+  text-decoration: none;
+  color: lightgrey;
+  transition: all 0.5s ease;
 }
 
 #logoImg {
@@ -84,44 +103,41 @@ form div {
 
 #accountPage {
   display: flex;
+  flex-direction: column;
   width: 100vw;
   justify-content: space-around;
   align-items: center;
   margin-top: 70px;
 }
 
-#accountLeft {
-  border-radius: 12px;
-  background: lightgrey;
-  margin: 15px;
-  padding: 20px;
+#accountPage button {
+  width: 150px;
+  height: 30px;
+  padding: 5px;
+  margin: 10px;
+  border-radius: 10px;
 }
 
-#accountRight {
-  border-radius: 12px;
+#accountPage button:hover {
   background: lightgrey;
-  margin: 15px;
-  padding: 20px;
+  transition: all 0.5s ease;
 }
 
 #orderHistory {
-  margin-top: 60px;
+  margin-top: 50px;
   padding: 10px;
   display: flex;
 }
 
 #orderHistoryLeft {
-  margin: 10px;
 }
 
 #orderHistoryRight {
-  border-radius: 12px;
-  background: lightgrey;
+  border-left: 1px solid lightgrey;
   padding: 15px;
-  margin: 10px;
   width: 30vw;
   min-width: 300px;
-  box-shadow: 3px 3px 5px;
+  height: 85vh;
 }
 
 #allProducts {
@@ -129,6 +145,21 @@ form div {
   flex-wrap: wrap;
   justify-content: space-around;
   margin-top: 70px;
+}
+
+#allProducts button {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  bottom: 43px;
+  left: 190px;
+  border-radius: 50%;
+  font-size: 20px;
+}
+
+#allProducts button:hover {
+  background: rgb(199, 199, 199);
+  transition: all 0.25s ease;
 }
 
 #singleProduct {
@@ -155,14 +186,26 @@ form div {
 
 #cartListPage {
   display: flex;
-  margin-top: 60px;
+  margin-top: 50px;
   padding: 10px;
   justify-content: space-around;
 }
 
+#cartListPage button:hover {
+  background: lightgrey;
+  transition: ease all 0.35s;
+}
+
 #cartListLeft {
-  width: 60vw;
-  margin: 10px;
+  width: 100%;
+}
+
+#cartListLeft button {
+  height: 30px;
+  width: 30px;
+  font-size: 18px;
+  margin: 5px;
+  border-radius: 50%;
 }
 
 #cartListLeft img {
@@ -170,13 +213,16 @@ form div {
   height: 75px;
 }
 
+#cartListLeft img:hover {
+  filter: brightness(80%);
+  transition: all 0.5s ease;
+}
+
 #cartListRight {
-  background: lightgrey;
-  width: 30vw;
-  border-radius: 12px;
+  width: 33vw;
   padding: 15px;
-  box-shadow: 3px 3px 3px;
-  margin: 10px;
+  border-left: 1px solid lightgrey;
+  height: 85vh;
 }
 
 #checkoutPage {
@@ -225,26 +271,30 @@ form div {
 }
 
 .productThumb {
-  margin: 20px;
-  background: lightgrey;
-  border-radius: 12px;
   padding: 15px;
-  box-shadow: 3px 3px 5px;
 }
 
 .productThumbImg {
-  width: 160px;
-  height: 160px;
+  width: 250px;
+  height: 250px;
   max-width: 250px;
   min-width: 150px;
-  border-radius: 10px;
+}
+
+.productThumbImg:hover {
+  filter: brightness(85%);
+  transition: all 0.25s ease;
 }
 
 .productThumbInfo {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  margin: 5px;
+}
+
+.productThumbInfo * {
+  margin: 0px;
 }
 
 .singleProductButton {
@@ -253,43 +303,67 @@ form div {
   border-radius: 12px;
 }
 
-.orderHistoryItem {
+.orderHistoryItem0 {
   display: flex;
   justify-content: space-between;
-  background: lightgrey;
-  border-radius: 12px;
   padding: 10px;
-  margin: 0px 10px 20px 0px;
   width: 60vw;
-  box-shadow: 3px 3px 5px;
+}
+
+.orderHistoryItem0:hover {
+  background: rgb(199, 199, 199);
+  transition: all 0.25s ease;
+}
+
+.orderHistoryItem1 {
+  display: flex;
+  justify-content: space-between;
+  background: rgb(232, 232, 232);
+  padding: 10px;
+  width: 60vw;
+}
+
+.orderHistoryItem1:hover {
+  background: rgb(199, 199, 199);
+  transition: all 0.25s ease;
 }
 
 .orderHistoryDetails {
   background: lightgrey;
-  border-radius: 12px;
   padding: 10px;
-  margin: 0px 10px 20px 0px;
   width: 60vw;
-  box-shadow: 3px 3px 5px;
 }
 
-.cartProduct {
+.cartProduct0 {
   display: flex;
-  background: lightgrey;
   justify-content: space-between;
   align-items: center;
-  margin: 0px 10px 20px 0px;
   padding: 10px;
-  border-radius: 12px;
-  box-shadow: 3px 3px 5px;
 }
 
-.cartProduct button {
-  height: 30px;
-  width: 30px;
-  font-size: 18px;
-  margin: 5px;
-  border-radius: 10px;
+.cartProduct1 {
+  background: rgb(232, 232, 232);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.editabletrue {
+  color: grey;
+  border: 1px solid grey;
+  padding: 5px;
+  margin: 10px;
+}
+
+.editabletrue:hover {
+  color: lightgrey;
+  transition: all 0.5s ease;
+}
+
+.editablefalse {
+  padding: 6px;
+  margin: 10px;
 }
 
 @media only screen and (max-width: 500px) {

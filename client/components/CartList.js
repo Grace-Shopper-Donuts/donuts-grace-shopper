@@ -19,14 +19,14 @@ class CartList extends React.Component {
       deleteCartProduct,
       updateCartProductQuantity
     } = this.props
-    console.log(cartProducts)
     return (
       <div id="cartListPage">
         <div id="cartListLeft">
-          {cartProducts.map(product => {
+          {cartProducts.map((product, index) => {
             return (
               <CartProduct
                 key={product.productId}
+                index={index % 2}
                 product={product}
                 deleteCartProduct={deleteCartProduct}
                 updateCartProductQuantity={updateCartProductQuantity}
@@ -41,12 +41,11 @@ class CartList extends React.Component {
           </h2>
           <h2>
             Order Total:{' '}
-            {/* {cartProducts.reduce(
+            {cartProducts.reduce(
               (a, b) =>
-                console.log(b)
                 Number(a) + Number(b.product.price) * Number(b.quantity),
               0
-            ) / 100} */}
+            ) / 100}
           </h2>
           <Link to="/checkout">
             <button type="button">Proceed to Checkout</button>

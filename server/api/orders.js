@@ -2,6 +2,8 @@ const router = require('express').Router()
 const {Order, Product, User, OrderProduct} = require('../db/models')
 module.exports = router
 
+// get all orders if administrator
+
 router.get('/', async (req, res, next) => {
   try {
     let user
@@ -17,6 +19,9 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// get specific order if order belongs to user
+// eager load the products in that order
+
 router.get('/:id', async (req, res, next) => {
   try {
     const order = await Order.findByPk(req.params.id, {
@@ -31,6 +36,8 @@ router.get('/:id', async (req, res, next) => {
     next(err)
   }
 })
+
+// get all orders for a user if authorizedß
 
 router.get('/user/:userId', async (req, res, next) => {
   try {

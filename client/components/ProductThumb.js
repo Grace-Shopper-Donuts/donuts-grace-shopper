@@ -13,8 +13,9 @@ const ProductThumb = props => {
         <Link to={`/products/${product.id}`}>
           <h3>{product.name}</h3>
         </Link>
+        <p>{product.manufacturer}</p>
         <p>$ {product.price / 100}</p>
-        <button onClick={addToCart}>ADD TO CART</button>
+        <button onClick={addToCart}>+</button>
       </div>
     </div>
   )
