@@ -1,6 +1,4 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {getOrderProducts} from '../store/reducers/orderProducts'
 import OrderHistoryDetails from './OrderHistoryDetails'
 
 class OrderHistoryItem extends React.Component {
@@ -8,15 +6,13 @@ class OrderHistoryItem extends React.Component {
     super(props)
     this.state = {
       showDetails: false,
-      evenOrOdd: 0,
-      orderProducts: []
+      evenOrOdd: 0
     }
     this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidMount() {
-    const {order, index} = this.props
-    this.props.getOrderProducts(order.id)
+    const {index} = this.props
     this.setState({
       evenOrOdd: index % 2
     })
@@ -24,8 +20,7 @@ class OrderHistoryItem extends React.Component {
 
   handleClick() {
     this.setState({
-      showDetails: !this.state.showDetails,
-      orderProducts: this.props.orderProducts
+      showDetails: !this.state.showDetails
     })
   }
 
@@ -43,7 +38,11 @@ class OrderHistoryItem extends React.Component {
           </button>
         </div>
         {this.state.showDetails ? (
-          <OrderHistoryDetails key={order.Id} order={order} />
+          <OrderHistoryDetails
+            key={order.Id}
+            orderProducts={order.orderProducts}
+            evenOrOdd={evenOrOdd}
+          />
         ) : (
           ''
         )}
@@ -52,16 +51,4 @@ class OrderHistoryItem extends React.Component {
   }
 }
 
-const mapState = state => {
-  return {
-    orderProducts: state.orderProducts
-  }
-}
-
-const mapDispatch = dispatch => {
-  return {
-    getOrderProducts: id => dispatch(getOrderProducts(id))
-  }
-}
-
-export default connect(mapState, mapDispatch)(OrderHistoryItem)
+export default OrderHistoryItem

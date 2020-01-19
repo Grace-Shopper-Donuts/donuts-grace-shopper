@@ -12,13 +12,15 @@ class CheckoutPage extends React.Component {
         address: '',
         city: '',
         state: '',
-        zipCode: ''
+        zipCode: '',
+        country: ''
       },
       paymentInfo: {
         cardHolderName: '',
         cardNumber: '',
         expiration: '',
-        securityCode: ''
+        securityCode: '',
+        promoCode: ''
       }
     }
     this.handleChange = this.handleChange.bind(this)
@@ -44,12 +46,14 @@ class CheckoutPage extends React.Component {
         address: '',
         city: '',
         state: '',
-        zipCode: ''
+        zipCode: '',
+        country: ''
       },
       paymentInfo: {
         cardNumber: '',
         expiration: '',
-        securityCode: ''
+        securityCode: '',
+        promoCode: ''
       }
     })
   }
@@ -67,7 +71,7 @@ class CheckoutPage extends React.Component {
               <input
                 type="text"
                 name="address"
-                value={shippingInfo.address}
+                // value={shippingInfo.address}
                 onChange={this.handleChange}
               />
             </div>
@@ -76,7 +80,7 @@ class CheckoutPage extends React.Component {
               <input
                 type="text"
                 name="city"
-                value={shippingInfo.city}
+                // value={shippingInfo.city}
                 onChange={this.handleChange}
               />
             </div>
@@ -85,16 +89,25 @@ class CheckoutPage extends React.Component {
               <input
                 type="text"
                 name="state"
-                value={shippingInfo.state}
+                // value={shippingInfo.state}
                 onChange={this.handleChange}
               />
             </div>
             <div>
-              <label htmlFor="zip">Zipcode:</label>
+              <label htmlFor="zipCode">Zipcode:</label>
               <input
                 type="text"
-                name="zip"
-                value={shippingInfo.zip}
+                name="zipCode"
+                // value={shippingInfo.zipCode}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="country">Country:</label>
+              <input
+                type="text"
+                name="country"
+                // value={shippingInfo.country}
                 onChange={this.handleChange}
               />
             </div>
@@ -132,7 +145,16 @@ class CheckoutPage extends React.Component {
               <label htmlFor="securityCode">Security Code:</label>
               <input
                 type="text"
-                name="security Code"
+                name="securityCode"
+                // value={paymentInfo.cardNumber}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="promoCode">Promo Code:</label>
+              <input
+                type="text"
+                name="promoCode"
                 // value={paymentInfo.cardNumber}
                 onChange={this.handleChange}
               />
@@ -143,10 +165,11 @@ class CheckoutPage extends React.Component {
             <ol>
               {cartProducts.map(product => {
                 return (
-                  <li key={product.productId}>
-                    {product.product.name}
-                    Quantity: {product.quantity}
-                    Price: ${product.product.price / 100}
+                  <li key={product.productId} className="checkoutListItem">
+                    <p>{product.product.name}</p>
+                    <p>{product.product.manufacturer}</p>
+                    <p>Quantity: {product.quantity}</p>
+                    <p>Price: ${product.product.price / 100}</p>
                   </li>
                 )
               })}
@@ -157,18 +180,18 @@ class CheckoutPage extends React.Component {
           <Link to="/cart">
             <button type="button">Return to Cart</button>
           </Link>
-          <button type="submit">Place Your Order</button>
           <h2>Order Summary</h2>
           <h3>Number of items: {cartProducts.length}</h3>
           <h3>Shipping: $0.00</h3>
           <h3>Tax: $0.00</h3>
-          <h2>
+          <h2 id="cehckoutPageTotal">
             Order Total: $
             {cartProducts.reduce(
               (a, b) => Number(a) + Number(b.product.price),
               0
             ) / 100}
           </h2>
+          <button type="submit">Place Your Order</button>
         </div>
       </form>
     )

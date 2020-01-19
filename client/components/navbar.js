@@ -21,14 +21,18 @@ const Navbar = ({handleClick, isLoggedIn, cartProducts}) => {
 
         {isLoggedIn ? (
           <div id="navRight">
-            <a href="#" onClick={handleClick}>
-              Logout
-            </a>
-            <Link to="/account">
-              <img src="userIcon.png" className="userIcon" />
-            </Link>
+            <div className="navRightSub">
+              <a href="#" onClick={handleClick}>
+                Logout
+              </a>
+            </div>
+            <div className="navRightSub">
+              <Link to="/account">
+                <img src="userIcon.png" className="userIcon" />
+              </Link>
+            </div>
             <Link to="/cart">
-              <div className="cartIconAndCount">
+              <div id="cartIconAndCount" className="navRightSub">
                 <img src="cartIcon.png" className="cartIcon" />
                 <div className="cartCount">{cartQuantity}</div>
               </div>
@@ -36,10 +40,14 @@ const Navbar = ({handleClick, isLoggedIn, cartProducts}) => {
           </div>
         ) : (
           <div id="navRight">
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
+            <div className="navRightSub">
+              <Link to="/login">Login</Link>
+            </div>
+            <div className="navRightSub">
+              <Link to="/signup">Sign Up</Link>
+            </div>
             <Link to="/cart">
-              <div className="cartIconAndCount">
+              <div id="cartIconAndCount" className="navRightSub">
                 <img src="cartIcon.png" className="cartIcon" />
                 <div className="cartCount">{cartQuantity}</div>
               </div>

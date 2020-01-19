@@ -37,7 +37,7 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-// get all orders for a user if authorizedß
+// get all orders for a user if authorized
 
 router.get('/user/:userId', async (req, res, next) => {
   try {
@@ -45,7 +45,17 @@ router.get('/user/:userId', async (req, res, next) => {
       const orders = await Order.findAll({
         where: {
           userId: req.params.userId
-        }
+        },
+        include: [
+          {
+            model: OrderProduct,
+            include: [
+              {
+                model: Product
+              }
+            ]
+          }
+        ]
       })
       res.json(orders)
     }
