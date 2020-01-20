@@ -30,11 +30,13 @@ class CheckoutPage extends React.Component {
     const {user, cartProducts, checkoutCart, getCartProducts} = this.props
     checkoutCart(cartProducts[0].orderId, user.id, cartProducts)
     getCartProducts()
+    this.setState({
+      address: ''
+    })
   }
 
   render() {
     const {cartProducts} = this.props
-
     return (
       <form onSubmit={this.handleSubmit} id="checkoutPage">
         <div id="checkoutPageLeft">
@@ -84,7 +86,7 @@ class CheckoutPage extends React.Component {
 
 const mapState = state => {
   return {
-    cartProducts: state.cartProducs,
+    cartProducts: state.cartProducts,
     user: state.user
   }
 }

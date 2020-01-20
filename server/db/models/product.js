@@ -6,6 +6,11 @@ const Product = db.define('product', {
     type: Sequelize.STRING,
     allowNull: false
   },
+  manufacturer: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    defaultValue: 'Placeholder Make'
+  },
   price: {
     type: Sequelize.INTEGER,
     allowNull: false
