@@ -11,6 +11,7 @@ import AccountPage from './components/AccountPage'
 import OrderHistory from './components/OrderHistory'
 import CartList from './components/CartList'
 import CheckoutPage from './components/CheckoutPage'
+import {getCartProducts} from './store/reducers/cartProducts'
 
 /**
  * COMPONENT
@@ -53,7 +54,8 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    cartProducts: state.cartProducts
   }
 }
 
@@ -61,6 +63,7 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
+      dispatch(getCartProducts())
     }
   }
 }
