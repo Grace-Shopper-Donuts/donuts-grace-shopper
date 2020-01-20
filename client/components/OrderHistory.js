@@ -27,10 +27,16 @@ class OrderHistory extends React.Component {
           </h1>
           <h2>Number of Orders: {orders.length}</h2>
           <h2>
-            Total Spending:
-            {orders
-              .reduce((a, b) => Number(a) + Number(b.totalPrice), 0)
-              .toFixed(2)}
+            Total Spending: $
+            {orders.reduce(
+              (a, b) =>
+                a +
+                b.orderProducts.reduce(
+                  (a, b) => a + b.checkoutPrice * b.quantity,
+                  0
+                ),
+              0
+            ) / 100}
           </h2>
         </div>
       </div>

@@ -31,7 +31,13 @@ class OrderHistoryItem extends React.Component {
       <div>
         <div className={`orderHistoryItem${evenOrOdd}`}>
           <h3>Order ID: {order.id}</h3>
-          <h3>Total Price: {order.totalPrice}</h3>
+          <h3>
+            Total Price: $
+            {order.orderProducts.reduce(
+              (a, b) => a + b.checkoutPrice * b.quantity,
+              0
+            ) / 100}
+          </h3>
           <h3>Order Date: {order.createdAt.slice(0, 10)}</h3>
           <button type="button" onClick={this.handleClick}>
             Details
