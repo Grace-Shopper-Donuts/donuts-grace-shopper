@@ -52,8 +52,7 @@ form div {
 
 #navRight {
   display: flex;
-  padding-right: 3%;
-  width: 500px;
+  padding-right: 30px;
   justify-content: space-between;
   align-items: center;
 }
@@ -94,12 +93,27 @@ form div {
 }
 
 #homepage {
-  margin-top: -50px;
-  height: 90%;
+  margin-top: 250px;
+  display: flex;
+  width: 100vw;
+  justify-content: space-around;
+  animation: 3s slidein;
 }
 
-#homepageImage {
-  width: 100vw;
+#homepageLeft {
+  width: 25vw;
+  height: 30vw;
+  animation-name: homePageSlideUp;
+  animation-duration: 1.25s;
+  animation-iteration-count: 1;
+}
+
+#homepageRight {
+  width: 25vw;
+  height: 30vw;
+  animation-name: homePageSlideUp;
+  animation-duration: 1.25s;
+  animation-iteration-count: 1;
 }
 
 #accountPage {
@@ -220,43 +234,83 @@ form div {
 }
 
 #cartListRight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 33vw;
   padding: 15px;
   border-left: 1px solid lightgrey;
   height: 85vh;
 }
 
+#cartListRight button {
+  width: 150px;
+  height: 30px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+#cartListRight button:hover {
+  background: rgb(199, 199, 199);
+  transition: all 0.25s ease;
+}
+
 #checkoutPage {
   display: flex;
   justify-content: space-around;
-  margin-top: 60px;
+  margin-top: 50px;
   padding: 10px;
-  justify-content: space-around;
 }
 
 #checkoutPageLeft {
   display: flex;
   flex-direction: column;
-  width: 60vw;
+  width: 100%;
 }
 
-#checkoutPageLeft div {
-  background: lightgrey;
-  border-radius: 12px;
-  box-shadow: 3px 3px 5px;
+#checkoutShippingInfo {
+  border-bottom: 1px solid lightgrey;
   padding: 15px;
-  margin: 10px;
+}
+
+#checkoutShippingInfo div {
+  margin-right: 50px;
+}
+
+#checkoutPaymentInfo {
+  border-bottom: 1px solid lightgrey;
+  padding: 15px;
+  background: rgb(227, 227, 227);
+}
+
+#checkoutPaymentInfo div {
+  margin-right: 50px;
+}
+
+#checkoutReviewOrder {
+  padding: 15px;
 }
 
 #checkoutPageRight {
-  background: lightgrey;
   display: flex;
   flex-direction: column;
-  width: 30vw;
-  border-radius: 12px;
+  align-items: center;
+  width: 33vw;
   padding: 15px;
-  margin: 10px;
-  box-shadow: 3px 3px 5px;
+  border-left: 1px solid lightgrey;
+  height: 85vh;
+}
+
+#checkoutPageRight button {
+  width: 150px;
+  height: 30px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+#checkoutPageRight button:hover {
+  background: rgb(199, 199, 199);
+  transition: all 0.25s ease;
 }
 
 #checkoutPageRight button {
@@ -264,14 +318,12 @@ form div {
   margin: 10px;
 }
 
-.navRightLoginToggle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 500px;
+.cartIcon {
+  height: 30px;
+  width: 30px;
 }
 
-.cartIcon {
+.userIcon {
   height: 30px;
   width: 30px;
 }
@@ -418,5 +470,14 @@ form div {
 
   #toggle:checked + #navRight {
     display: none;
+  }
+}
+
+@keyframes homePageSlideUp {
+  0% {
+    margin-top: 100vh;
+  }
+  100% {
+    margin-top: 0vh;
   }
 }

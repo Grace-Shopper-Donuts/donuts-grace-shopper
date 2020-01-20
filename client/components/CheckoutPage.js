@@ -1,7 +1,6 @@
 import React from 'React'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {getCartProducts} from '../store/reducers/cartProducts'
 import {checkoutCart} from '../store/reducers/orders'
 
 class CheckoutPage extends React.Component {
@@ -9,14 +8,25 @@ class CheckoutPage extends React.Component {
     super()
 
     this.state = {
-      address: ''
+      shippingInfo: {
+        address: '',
+        city: '',
+        state: '',
+        zipCode: ''
+      },
+      paymentInfo: {
+        cardHolderName: '',
+        cardNumber: '',
+        expiration: '',
+        securityCode: ''
+      }
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
-    this.props.getCartProducts()
+    // this.props.getCartProducts()
   }
 
   handleChange(e) {
@@ -27,37 +37,118 @@ class CheckoutPage extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    const {user, cartProducts, checkoutCart, getCartProducts} = this.props
+    const {user, cartProducts, checkoutCart} = this.props
     checkoutCart(cartProducts[0].orderId, user.id, cartProducts)
-    getCartProducts()
     this.setState({
-      address: ''
+      shippingInfo: {
+        address: '',
+        city: '',
+        state: '',
+        zipCode: ''
+      },
+      paymentInfo: {
+        cardNumber: '',
+        expiration: '',
+        securityCode: ''
+      }
     })
   }
 
   render() {
     const {cartProducts} = this.props
+    const {shippingInfo, paymentInfo} = this.state
     return (
       <form onSubmit={this.handleSubmit} id="checkoutPage">
         <div id="checkoutPageLeft">
           <div id="checkoutShippingInfo">
-            <h2>Shipping Adress</h2>
-            <label htmlFor="address">Address:</label>
-            <input
-              type="text"
-              name="address"
-              value={this.state.address}
-              onChange={this.handleChange}
-            />
+            <h2>Shipping Information</h2>
+            <div>
+              <label htmlFor="address">Address:</label>
+              <input
+                type="text"
+                name="address"
+                value={shippingInfo.address}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="city">City:</label>
+              <input
+                type="text"
+                name="city"
+                value={shippingInfo.city}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="state">State:</label>
+              <input
+                type="text"
+                name="state"
+                value={shippingInfo.state}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="zip">Zipcode:</label>
+              <input
+                type="text"
+                name="zip"
+                value={shippingInfo.zip}
+                onChange={this.handleChange}
+              />
+            </div>
           </div>
           <div id="checkoutPaymentInfo">
             <h2>Payment Method</h2>
+            <div>
+              <label htmlFor="cardHolderName">Name:</label>
+              <input
+                type="text"
+                name="cardHolderName"
+                // value={paymentInfo.cardNumber}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="cardNumber">Card Number:</label>
+              <input
+                type="text"
+                name="cardNumber"
+                // value={paymentInfo.cardNumber}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="expiration">Expiration Date:</label>
+              <input
+                type="text"
+                name="expiration"
+                // value={paymentInfo.cardNumber}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="securityCode">Security Code:</label>
+              <input
+                type="text"
+                name="security Code"
+                // value={paymentInfo.cardNumber}
+                onChange={this.handleChange}
+              />
+            </div>
           </div>
           <div id="checkoutReviewOrder">
             <h2>Review Items</h2>
             <ol>
               {cartProducts.map(product => {
-                return <li>{product.product.name}</li>
+                return (
+                  <li key={product.productId}>
+                    {product.product.name}
+                    Quantity: {product.quantity}
+                    Price: ${product.product.price / 100}
+                  </li>
+                )
               })}
             </ol>
           </div>
@@ -72,7 +163,7 @@ class CheckoutPage extends React.Component {
           <h3>Shipping: $0.00</h3>
           <h3>Tax: $0.00</h3>
           <h2>
-            Order Total:{' '}
+            Order Total: $
             {cartProducts.reduce(
               (a, b) => Number(a) + Number(b.product.price),
               0
@@ -93,7 +184,6 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getCartProducts: () => dispatch(getCartProducts()),
     checkoutCart: (orderId, userId, cartProducts) =>
       dispatch(checkoutCart(orderId, userId, cartProducts))
   }
