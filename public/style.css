@@ -166,6 +166,12 @@ form div {
   transition: all 0.5s ease;
 }
 
+#accountPageInputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #orderHistory {
   margin-top: 50px;
   padding: 10px;
@@ -521,6 +527,11 @@ form div {
 .editablefalse {
   padding: 6px;
   margin: 10px;
+}
+
+.fullUserName {
+  display: flex;
+  justify-content: space-between;
 }
 
 @media only screen and (max-width: 500px) {

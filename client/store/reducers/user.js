@@ -1,32 +1,33 @@
 import axios from 'axios'
 import history from '../../history'
 
-/**
- * ACTION TYPES
- */
+// ACTION TYPES
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
+// const UPDATE_USER_INFO = 'UPDATE_USER_INFO'
 
-/**
- * INITIAL STATE
- */
+// INITIAL STATE
 const defaultUser = {}
 
-/**
- * ACTION CREATORS
- */
+// ACTION CREATORS
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
+// const updateUserInfo = () ... just call getUser?
 
-/**
- * THUNK CREATORS
- */
+// THUNK CREATORS
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
     dispatch(getUser(res.data || defaultUser))
   } catch (err) {
     console.error(err)
+  }
+}
+
+export const updateUserInfo = (userId, userInfo) => {
+  return async dispatch => {
+    let {data} = await axios.put(`/api/users/${userId}`, userInfo)
+    dispatch(getUser(data))
   }
 }
 
