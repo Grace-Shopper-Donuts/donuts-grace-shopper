@@ -30,7 +30,13 @@ class SingleProduct extends React.Component {
   }
 
   render() {
-    const {name, imgPath, price, description} = this.props.currentProduct
+    const {
+      name,
+      imgPath,
+      price,
+      description,
+      manufacturer
+    } = this.props.currentProduct
     return (
       <div id="singleProduct">
         <div id="singleProductLeft">
@@ -38,8 +44,8 @@ class SingleProduct extends React.Component {
         </div>
         <div id="singleProductRight">
           <h1>{name}</h1>
-          <h1>$ {price / 100}</h1>
-          <div>{description}</div>
+          <h2>{manufacturer}</h2>
+          <h2>$ {price / 100}</h2>
           <button
             type="submit"
             className="singleProductButton"
@@ -47,6 +53,7 @@ class SingleProduct extends React.Component {
           >
             ADD TO CART
           </button>
+          <p>{description}</p>
         </div>
       </div>
     )

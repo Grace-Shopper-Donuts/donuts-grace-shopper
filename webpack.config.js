@@ -25,5 +25,8 @@ module.exports = {
         loader: 'babel-loader'
       }
     ]
+  },
+  stats: {
+    warnings: false
   }
 }

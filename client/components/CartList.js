@@ -4,7 +4,7 @@ import {
   getCartProducts,
   deleteCartProduct,
   updateCartProductQuantity
-} from '../store/reducers/orderProducts'
+} from '../store/reducers/cartProducts'
 import CartProduct from './CartProduct'
 import {Link} from 'react-router-dom'
 
@@ -22,10 +22,11 @@ class CartList extends React.Component {
     return (
       <div id="cartListPage">
         <div id="cartListLeft">
-          {cartProducts.map(product => {
+          {cartProducts.map((product, index) => {
             return (
               <CartProduct
                 key={product.productId}
+                index={index % 2}
                 product={product}
                 deleteCartProduct={deleteCartProduct}
                 updateCartProductQuantity={updateCartProductQuantity}
@@ -34,12 +35,13 @@ class CartList extends React.Component {
           })}
         </div>
         <div id="cartListRight">
+          <h1>Cart Details</h1>
           <h2>
             Number of items:{' '}
             {cartProducts.reduce((a, b) => Number(a) + Number(b.quantity), 0)}
           </h2>
           <h2>
-            Order Total:{' '}
+            Order Total: $
             {cartProducts.reduce(
               (a, b) =>
                 Number(a) + Number(b.product.price) * Number(b.quantity),
@@ -57,7 +59,7 @@ class CartList extends React.Component {
 
 const mapState = state => {
   return {
-    cartProducts: state.orderProducts
+    cartProducts: state.cartProducts
   }
 }
 

@@ -4,48 +4,71 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <nav id="navbar">
-      <div id="navLeft">
-        <Link to="/">
-          <img src="/youTuba_logo.png" id="logoImg" />
-        </Link>
-      </div>
+const Navbar = ({handleClick, isLoggedIn, cartProducts}) => {
+  const cartQuantity = cartProducts.reduce((a, b) => a + b.quantity, 0)
+  return (
+    <div>
+      <nav id="navbar">
+        <div id="navLeft">
+          <Link to="/">
+            <img src="/youTuba_logo.png" id="logoImg" />
+          </Link>
+        </div>
 
-      {isLoggedIn ? (
-        <div id="navRight">
-          {/* The navbar will show these links after you log in */}
-          {/* <input type="text" name="search" placeholder="Search" /> */}
-          <Link to="/account">Account</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
+        <div id="navCenter">
           <Link to="/products">All Products</Link>
-          <Link to="/cart"> My Cart </Link>
         </div>
-      ) : (
-        <div id="navRight">
-          {/* The navbar will show these links before you log in */}
-          {/* <input type="text" name="search" placeholder="Search" /> */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-          <Link to="/products">All Products</Link>
-          <Link to="/cart"> My Cart </Link>
-        </div>
-      )}
-      <label htmlFor="toggle">&#9776;</label>
-      <input type="checkbox" id="toggle" />
-    </nav>
-  </div>
-)
+
+        {isLoggedIn ? (
+          <div id="navRight">
+            <div className="navRightSub">
+              <a href="#" onClick={handleClick}>
+                Logout
+              </a>
+            </div>
+            <div className="navRightSub">
+              <Link to="/account">
+                <img src="userIcon.png" className="userIcon" />
+              </Link>
+            </div>
+            <Link to="/cart">
+              <div id="cartIconAndCount" className="navRightSub">
+                <img src="cartIcon.png" className="cartIcon" />
+                <div className="cartCount">{cartQuantity}</div>
+              </div>
+            </Link>
+          </div>
+        ) : (
+          <div id="navRight">
+            <div className="navRightSub">
+              <Link to="/login">Login</Link>
+            </div>
+            <div className="navRightSub">
+              <Link to="/signup">Sign Up</Link>
+            </div>
+            <Link to="/cart">
+              <div id="cartIconAndCount" className="navRightSub">
+                <img src="cartIcon.png" className="cartIcon" />
+                <div className="cartCount">{cartQuantity}</div>
+              </div>
+            </Link>
+          </div>
+        )}
+
+        <label htmlFor="toggle">&#9776;</label>
+        <input type="checkbox" id="toggle" />
+      </nav>
+    </div>
+  )
+}
 
 /**
  * CONTAINER
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    cartProducts: state.cartProducts
   }
 }
 

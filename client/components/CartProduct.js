@@ -2,18 +2,19 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 export const CartProduct = props => {
-  let {product, deleteCartProduct, updateCartProductQuantity} = props
+  let {product, index, deleteCartProduct, updateCartProductQuantity} = props
   const orderProduct = product
   const {productId, orderId} = orderProduct
   product = product.product
 
   return (
-    <div className="cartProduct">
+    <div className={`cartProduct${index}`}>
       <Link to={`/products/${productId}`}>
         <img src={product.imgPath} />
       </Link>
-      <h2>{product.name}</h2>
-      <h2>Quantity: {orderProduct.quantity}</h2>
+      <h3>{product.name}</h3>
+      <h3>{product.manufacturer}</h3>
+      <h3>Quantity: {orderProduct.quantity}</h3>
       <div>
         <button
           type="button"

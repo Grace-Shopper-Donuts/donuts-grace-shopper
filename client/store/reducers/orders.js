@@ -19,6 +19,8 @@ export const getPastOrders = userId => {
   }
 }
 
+// need to dispatch a different thing here to reload checkout page
+
 export const checkoutCart = (orderId, userId, cartProducts) => {
   return async dispatch => {
     await axios.put(`/api/orders/checkout`, {orderId, userId, cartProducts})

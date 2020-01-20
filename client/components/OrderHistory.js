@@ -1,7 +1,6 @@
 import React from 'React'
 import {connect} from 'react-redux'
 import {me} from '../store/reducers/user'
-import {Link} from 'react-router'
 import {getPastOrders} from '../store/reducers/orders'
 import OrderHistoryItem from './OrderHistoryItem'
 
@@ -16,8 +15,10 @@ class OrderHistory extends React.Component {
     return (
       <div id="orderHistory">
         <div id="orderHistoryLeft">
-          {orders.map(order => {
-            return <OrderHistoryItem key={order.id} order={order} />
+          {orders.map((order, index) => {
+            return (
+              <OrderHistoryItem key={order.id} order={order} index={index} />
+            )
           })}
         </div>
         <div id="orderHistoryRight">
@@ -26,10 +27,16 @@ class OrderHistory extends React.Component {
           </h1>
           <h2>Number of Orders: {orders.length}</h2>
           <h2>
-            Total Spending:
-            {orders
-              .reduce((a, b) => Number(a) + Number(b.totalPrice), 0)
-              .toFixed(2)}
+            Total Spending: $
+            {orders.reduce(
+              (a, b) =>
+                a +
+                b.orderProducts.reduce(
+                  (a, b) => a + b.checkoutPrice * b.quantity,
+                  0
+                ),
+              0
+            ) / 100}
           </h2>
         </div>
       </div>

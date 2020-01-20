@@ -4,28 +4,49 @@ import {me} from '../store/reducers/user'
 import {Link} from 'react-router-dom'
 
 class AccountPage extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      editable: false
+    }
+    this.toggleEditable = this.toggleEditable.bind(this)
+  }
+
+  toggleEditable(e) {
+    e.preventDefault()
+    this.setState({
+      editable: !this.state.editable
+    })
+    console.log(this.state)
+  }
+
   componentDidMount() {
     this.props.me()
   }
 
   render() {
     const {user} = this.props
+    const {editable} = this.state
     return (
       <div id="accountPage">
-        <div id="accountLeft">
-          <img src={user.imgPath} />
-        </div>
-        <div id="accountRight">
-          <h1>
-            {user.firstName} {user.lastName}
-          </h1>
-          <h2>{user.email}</h2>
-          <h2>{user.address}</h2>
-          <Link to="/orderHistory">
-            <button>Order History</button>
-          </Link>
-          <button>Delete Account</button>
-        </div>
+        <h1>My Account</h1>
+        <h2>Account Details:</h2>
+        <h3 contentEditable={editable} className={`editable${editable}`}>
+          {user.firstName} {user.lastName}
+        </h3>
+        <h3 contentEditable={editable} className={`editable${editable}`}>
+          {user.email}
+        </h3>
+        <h3 contentEditable={editable} className={`editable${editable}`}>
+          {user.address}
+        </h3>
+        <Link to="/orderHistory">
+          <button type="button">Order History</button>
+        </Link>
+        <button type="button" onClick={this.toggleEditable}>
+          Edit Details
+        </button>
+        {editable ? <button type="submit">Submit Changes</button> : ''}
       </div>
     )
   }

@@ -2,9 +2,10 @@ const router = require('express').Router()
 const {Order, Product, User, OrderProduct} = require('../db/models')
 module.exports = router
 
+// get all orders if administrator
+
 router.get('/', async (req, res, next) => {
   try {
-    //we have to check if the user is admin after we put the isAdmin property on the model
     let user
     if (req.user) user = await User.findByPk(req.user.id)
     if (user && user.isAdmin) {
@@ -17,6 +18,9 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+// get specific order if order belongs to user
+// eager load the products in that order
 
 router.get('/:id', async (req, res, next) => {
   try {
@@ -33,13 +37,25 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+// get all orders for a user if authorized
+
 router.get('/user/:userId', async (req, res, next) => {
   try {
     if (req.user && req.user.id === Number(req.params.userId)) {
       const orders = await Order.findAll({
         where: {
           userId: req.params.userId
-        }
+        },
+        include: [
+          {
+            model: OrderProduct,
+            include: [
+              {
+                model: Product
+              }
+            ]
+          }
+        ]
       })
       res.json(orders)
     }
@@ -48,23 +64,38 @@ router.get('/user/:userId', async (req, res, next) => {
   }
 })
 
+// checkout an order - set completed to true
+
 router.put('/checkout', async (req, res, next) => {
   try {
     const {orderId, userId, cartProducts} = req.body
+
     const order = await Order.findByPk(orderId)
+
     cartProducts.forEach(async orderProduct => {
       const product = orderProduct.product
-      await orderProduct.update({
-        checkoutPrice: product.price
-      })
+      await OrderProduct.update(
+        {
+          checkoutPrice: product.price
+        },
+        {
+          where: {
+            orderId: orderId,
+            productId: orderProduct.productId
+          }
+        }
+      )
     })
+
     await order.update({
       completed: true
     })
+
     await Order.create({
       userId: userId,
       completed: false
     })
+
     res.sendStatus(200)
   } catch (err) {
     next(err)

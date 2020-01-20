@@ -55,7 +55,12 @@ router.get('/order/:orderId', async (req, res, next) => {
     const orderProducts = await OrderProduct.findAll({
       where: {
         orderId: req.params.orderId
-      }
+      },
+      include: [
+        {
+          model: Product
+        }
+      ]
     })
     res.json(orderProducts)
   } catch (err) {
@@ -63,7 +68,7 @@ router.get('/order/:orderId', async (req, res, next) => {
   }
 })
 
-// below route needs clarification
+// add items to cart and increment if already existing
 
 router.post('/cart', async (req, res, next) => {
   try {
@@ -93,6 +98,7 @@ router.post('/cart', async (req, res, next) => {
         quantity: cartProduct.dataValues.quantity + 1
       })
     } else {
+      // if it doesnt exist, create it
       cartProduct = await OrderProduct.create({
         orderId: cart[0].dataValues.id,
         productId: req.body.productId,

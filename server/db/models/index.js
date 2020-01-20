@@ -9,6 +9,8 @@ Order.belongsToMany(User, {through: OrderProduct})
 Order.belongsToMany(Product, {through: OrderProduct})
 Product.belongsToMany(Order, {through: OrderProduct})
 OrderProduct.belongsTo(Product)
+OrderProduct.belongsTo(Order)
+Order.hasMany(OrderProduct)
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
