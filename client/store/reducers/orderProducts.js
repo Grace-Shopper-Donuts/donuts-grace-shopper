@@ -19,7 +19,6 @@ export const addedGuestProduct = product => {
 
 export const addGuestProductToCart = product => {
   var cartProducts = JSON.parse(localStorage.getItem('cartProducts')) || {}
-  console.log(cartProducts)
   cartProducts = {...cartProducts}
   if (cartProducts[product.id]) {
     cartProducts[product.id].quantity += 1
