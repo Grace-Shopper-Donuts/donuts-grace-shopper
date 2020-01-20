@@ -61,6 +61,17 @@ form div {
   align-items: center;
 }
 
+#navCenter a {
+  text-decoration: none;
+  color: black;
+}
+
+#navCenter a:hover {
+  text-decoration: none;
+  color: lightgrey;
+  transition: all 0.25s ease;
+}
+
 #navRight a {
   text-decoration: none;
   color: black;
@@ -69,7 +80,7 @@ form div {
 #navRight a:hover {
   text-decoration: none;
   color: lightgrey;
-  transition: all 0.5s ease;
+  transition: all 0.25s ease;
 }
 
 #logoImg {
@@ -79,14 +90,19 @@ form div {
 }
 
 #logoImg:hover {
-  filter: brightness(70%);
-  transition: all 1s ease;
+  filter: brightness(60%);
+  transition: all 0.5s ease;
 }
 
 #cartIconAndCount {
   display: flex;
   justify-content: space-around;
   width: 65px;
+}
+
+#cartIconAndCount:hover {
+  opacity: 0.5;
+  transition: all 0.25s ease;
 }
 
 #authPage {
@@ -156,9 +172,6 @@ form div {
   display: flex;
 }
 
-#orderHistoryLeft {
-}
-
 #orderHistoryRight {
   border-left: 1px solid lightgrey;
   padding: 15px;
@@ -194,25 +207,44 @@ form div {
 }
 
 #singleProduct {
-  margin-top: 30px;
-  padding: 50px;
+  margin-top: 100px;
   display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-evenly;
 }
 
 #singleProductLeft {
-  width: 50vw;
+  width: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+#singleProductLeft img {
+  height: 350px;
+  width: 350px;
+}
+
 #singleProductRight {
-  width: 50vw;
-  height: 80vh;
+  width: 400px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+}
+
+#singleProductRight button {
+  width: 200px;
+  border-radius: 10px;
+  font-size: 13px;
+  margin: 10px;
+  padding: 10px;
+}
+
+#singleProductRight button:hover {
+  background: rgb(199, 199, 199);
+  transition: all 0.25s ease;
 }
 
 #cartListPage {
@@ -290,7 +322,11 @@ form div {
 }
 
 #checkoutShippingInfo div {
-  margin-right: 50px;
+  margin-right: 40px;
+}
+
+#checkoutShippingInfo div * {
+  margin: 5px;
 }
 
 #checkoutPaymentInfo {
@@ -299,7 +335,11 @@ form div {
 }
 
 #checkoutPaymentInfo div {
-  margin-right: 50px;
+  margin-right: 40px;
+}
+
+#checkoutPaymentInfo div * {
+  margin: 5px;
 }
 
 #checkoutReviewOrder {
@@ -317,20 +357,16 @@ form div {
 }
 
 #checkoutPageRight button {
-  width: 150px;
+  width: 200px;
   height: 30px;
   border-radius: 10px;
   font-size: 13px;
+  margin: 10px;
 }
 
 #checkoutPageRight button:hover {
   background: rgb(199, 199, 199);
   transition: all 0.25s ease;
-}
-
-#checkoutPageRight button {
-  width: 200px;
-  margin: 10px;
 }
 
 #cehckoutPageTotal {
@@ -350,6 +386,11 @@ form div {
 .userIcon {
   height: 30px;
   width: 30px;
+}
+
+.userIcon:hover {
+  opacity: 0.5;
+  transition: all 0.25s ease;
 }
 
 .cartCount {
@@ -375,7 +416,7 @@ form div {
 }
 
 .productThumbImg:hover {
-  filter: brightness(85%);
+  opacity: 0.5;
   transition: all 0.25s ease;
 }
 
@@ -440,12 +481,22 @@ form div {
   padding: 10px;
 }
 
+.cartProduct0:hover {
+  background: rgb(232, 232, 232);
+  transition: ease all 0.25s;
+}
+
 .cartProduct1 {
   background: rgb(232, 232, 232);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
+}
+
+.cartProduct1:hover {
+  background: rgb(206, 206, 206);
+  transition: ease all 0.25s;
 }
 
 .checkoutListItem {

@@ -4,6 +4,11 @@ let initialState = []
 
 const GOT_CART_PRODUCTS = 'GOT_CART_PRODUCTS'
 const ADD_ORDER_PRODUCT = 'ADD_ORDER_PRODUCT'
+// const SEND_EMPTY_CART = 'SEND_EMPTY_CART'
+
+// const sendEmptyCart = () => ({
+//   type: SEND_EMPTY_CART
+// })
 
 const addedProduct = product => ({
   type: ADD_ORDER_PRODUCT,
@@ -72,6 +77,8 @@ export default (state = initialState, action) => {
       return [...state, action.product]
     case GOT_CART_PRODUCTS:
       return action.cartProducts
+    // case SEND_EMPTY_CART:
+    //   return []
     default:
       return state
   }
