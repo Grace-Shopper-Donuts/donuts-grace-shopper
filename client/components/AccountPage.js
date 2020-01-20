@@ -1,4 +1,4 @@
-import React from 'React'
+import React from 'react'
 import {connect} from 'react-redux'
 import {me} from '../store/reducers/user'
 import {Link} from 'react-router-dom'
