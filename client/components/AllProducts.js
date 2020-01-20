@@ -1,4 +1,4 @@
-import React from 'React'
+import React from 'react'
 import ProductThumb from './ProductThumb'
 import {connect} from 'react-redux'
 import {getAllProducts} from '../store/reducers/allProducts'
