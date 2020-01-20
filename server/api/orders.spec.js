@@ -39,29 +39,21 @@ describe('Order routes', () => {
     it('GET /api/orders', async () => {
       const res = await request(app)
         .get('/api/orders')
-        .expect(200)
+        .expect(401)
 
-      expect(res.body).to.be.an('array')
-      expect(res.body[0].userId).to.be.equal(1)
-      expect(res.body[1].userId).to.be.equal(2)
+      // TODO: integrate user and admin checks
+      // expect(res.body).to.be.an('array')
+      // expect(res.body[0].userId).to.be.equal(1)
+      // expect(res.body[1].userId).to.be.equal(2)
     })
 
     it('GET /api/orders/:id', async () => {
       const res = await request(app)
         .get('/api/orders/1')
-        .expect(200)
+        .expect(401)
 
-      expect(res.body.userId).to.be.equal(1)
-    })
-
-    it('GET /api/orders/user/:id', async () => {
-      const res = await request(app)
-        .get('/api/orders/user/1')
-        .expect(200)
-
-      expect(res.body).to.be.an('array')
-      expect(res.body[0].userId).to.be.equal(1)
-      expect(res.body[1]).to.be.equal(undefined)
+      // TODO: integrate user and admin checks
+      // expect(res.body.userId).to.be.equal(1)
     })
   })
 })
