@@ -50,6 +50,10 @@ form div {
   background: white;
 }
 
+#navCenter {
+  justify-self: center;
+}
+
 #navRight {
   display: flex;
   padding-right: 30px;
@@ -79,6 +83,12 @@ form div {
   transition: all 1s ease;
 }
 
+#cartIconAndCount {
+  display: flex;
+  justify-content: space-around;
+  width: 65px;
+}
+
 #authPage {
   margin-top: 100px;
   width: 100vw;
@@ -93,26 +103,28 @@ form div {
 }
 
 #homepage {
-  margin-top: 250px;
+  margin-top: 180px;
   display: flex;
-  width: 100vw;
+  width: 75vw;
   justify-content: space-around;
   animation: 3s slidein;
 }
 
-#homepageLeft {
-  width: 25vw;
-  height: 30vw;
+#homepagePerson {
+  width: 32vw;
+  height: 40vw;
   animation-name: homePageSlideUp;
   animation-duration: 1.25s;
   animation-iteration-count: 1;
 }
 
-#homepageRight {
+#musicNotes {
   width: 25vw;
-  height: 30vw;
-  animation-name: homePageSlideUp;
-  animation-duration: 1.25s;
+  height: 15vw;
+  margin-top: 15vw;
+  margin-left: -25vw;
+  animation-name: fadeIn;
+  animation-duration: 2.5s;
   animation-iteration-count: 1;
 }
 
@@ -150,9 +162,13 @@ form div {
 #orderHistoryRight {
   border-left: 1px solid lightgrey;
   padding: 15px;
+  padding-left: 35px;
   width: 30vw;
   min-width: 300px;
   height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #allProducts {
@@ -280,7 +296,6 @@ form div {
 #checkoutPaymentInfo {
   border-bottom: 1px solid lightgrey;
   padding: 15px;
-  background: rgb(227, 227, 227);
 }
 
 #checkoutPaymentInfo div {
@@ -296,7 +311,7 @@ form div {
   flex-direction: column;
   align-items: center;
   width: 33vw;
-  padding: 15px;
+  padding: 25px 15px 15px 15px;
   border-left: 1px solid lightgrey;
   height: 85vh;
 }
@@ -318,6 +333,15 @@ form div {
   margin: 10px;
 }
 
+#cehckoutPageTotal {
+  border-top: 1px solid lightgrey;
+  padding-top: 35px;
+}
+
+.navRightSub {
+  margin-left: 25px;
+}
+
 .cartIcon {
   height: 30px;
   width: 30px;
@@ -326,12 +350,6 @@ form div {
 .userIcon {
   height: 30px;
   width: 30px;
-}
-
-.cartIconAndCount {
-  display: flex;
-  justify-content: space-around;
-  width: 65px;
 }
 
 .cartCount {
@@ -383,11 +401,7 @@ form div {
   justify-content: space-between;
   padding: 10px;
   width: 60vw;
-}
-
-.orderHistoryItem0:hover {
-  background: rgb(199, 199, 199);
-  transition: all 0.25s ease;
+  border-bottom: 1px solid lightgrey;
 }
 
 .orderHistoryItem1 {
@@ -396,17 +410,27 @@ form div {
   background: rgb(232, 232, 232);
   padding: 10px;
   width: 60vw;
+  border-bottom: 1px solid lightgrey;
 }
 
-.orderHistoryItem1:hover {
-  background: rgb(199, 199, 199);
-  transition: all 0.25s ease;
-}
-
-.orderHistoryDetails {
-  background: lightgrey;
+.orderHistoryDetails0 {
   padding: 10px;
   width: 60vw;
+  margin-top: -20px;
+}
+
+.orderHistoryDetails1 {
+  background: rgb(232, 232, 232);
+  padding: 10px;
+  width: 60vw;
+  margin-top: -20px;
+}
+
+.orderHistoryDetailsItem {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  border-bottom: 1px solid lightgrey;
 }
 
 .cartProduct0 {
@@ -422,6 +446,13 @@ form div {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
+}
+
+.checkoutListItem {
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+  border-bottom: 1px solid lightgrey;
 }
 
 .editabletrue {
@@ -479,5 +510,17 @@ form div {
   }
   100% {
     margin-top: 0vh;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0%;
+  }
+  60% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
   }
 }

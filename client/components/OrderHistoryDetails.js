@@ -1,20 +1,23 @@
 import React from 'react'
 
 const OrderHistoryDetails = props => {
-  const {orderProducts} = props
+  const {orderProducts, evenOrOdd} = props
   return (
-    <div className="orderHistoryDetails">
+    <div className={`orderHistoryDetails${evenOrOdd}`}>
       <ol>
-        test
-        {/* {orderProducts.map(orderProduct => {
+        {orderProducts.map(orderProduct => {
           return (
-            <li key={orderProduct.productId}>
-              {orderProduct.product.name}
-              Quantity: {orderProduct.quantity}
-              Price: {orderProduct.checkoutPrice}
+            <li
+              key={orderProduct.productId}
+              className="orderHistoryDetailsItem"
+            >
+              <p>{orderProduct.product.name}</p>
+              <p>{orderProduct.product.manufacturer}</p>
+              <p>Quantity: {orderProduct.quantity}</p>
+              <p>Price: {orderProduct.checkoutPrice / 100}</p>
             </li>
           )
-        })} */}
+        })}
       </ol>
     </div>
   )

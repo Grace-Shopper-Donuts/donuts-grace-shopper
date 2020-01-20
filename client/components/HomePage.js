@@ -8,8 +8,8 @@ class HomePage extends React.Component {
   render() {
     return (
       <div id="homepage">
-        <img src="/homePageLeft.png" id="homepageLeft" />
-        <img src="/homePageRight.png" id="homepageRight" />
+        <img src="/homePageLeft.png" id="homepagePerson" />
+        <img src="/musicNotes.png" id="musicNotes" />
       </div>
     )
   }
