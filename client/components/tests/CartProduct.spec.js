@@ -27,7 +27,7 @@ describe('CartProduct component', () => {
     }
     // orderProduct is being passed as a key on prop to CartProduct
     // orderProduct holds product information provided from eager loading
-    cartProduct = shallow(<CartProduct product={ordProd} />)
+    cartProduct = shallow(<CartProduct product={ordProd} isLoggedIn={true} />)
   })
 
   it('renders the correct image', () => {
