@@ -24,8 +24,6 @@ class SingleProduct extends React.Component {
     if (this.props.isLoggedIn) {
       this.props.addOrderProductToCart()
     } else {
-      console.log('adding guest product to cart...')
-      console.log('current', this.props.currentProduct)
       this.props.addGuestProductToCart(this.props.currentProduct)
     }
   }
@@ -77,11 +75,7 @@ const mapDispatch = (dispatch, ownProps) => {
     getSingleProduct: () => dispatch(getSingleProduct(id)),
     addOrderProductToCart: () => dispatch(addOrderProductToCart(id)),
     getGuestCartProducts: () => dispatch(getGuestCartProducts()),
-    addGuestProductToCart(product) {
-      console.log('reached this point')
-      dispatch(addGuestProductToCart(product))
-      console.log('dispatched')
-    }
+    addGuestProductToCart: product => dispatch(addGuestProductToCart(product))
   }
 }
 

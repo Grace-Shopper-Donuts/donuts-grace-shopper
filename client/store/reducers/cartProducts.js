@@ -4,11 +4,6 @@ let initialState = []
 
 const GOT_CART_PRODUCTS = 'GOT_CART_PRODUCTS'
 const ADD_ORDER_PRODUCT = 'ADD_ORDER_PRODUCT'
-// const SEND_EMPTY_CART = 'SEND_EMPTY_CART'
-
-// const sendEmptyCart = () => ({
-//   type: SEND_EMPTY_CART
-// })
 
 const addedProduct = product => ({
   type: ADD_ORDER_PRODUCT,
@@ -56,7 +51,7 @@ export const deleteCartProduct = (productId, orderId) => {
   }
 }
 
-export const updateCartProductQuantity = (productId, orderId, newQuantity) => {
+export const updateCartProductQuantity = (productId, newQuantity, orderId) => {
   return async dispatch => {
     try {
       await axios.put('/api/orderProduct/cart', {
@@ -77,8 +72,6 @@ export default (state = initialState, action) => {
       return [...state]
     case GOT_CART_PRODUCTS:
       return action.cartProducts
-    // case SEND_EMPTY_CART:
-    //   return []
     default:
       return state
   }

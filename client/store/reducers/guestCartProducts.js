@@ -1,41 +1,58 @@
 const ADD_GUEST_PRODUCT = 'ADD_GUEST_PRODUCT'
 const GOT_GUEST_PRODUCTS = 'GOT_GUEST_PRODUCTS'
 const REMOVE_GUEST_PRODUCT = 'REMOVED_GUEST_PRODUCT'
+const UPDATE_GUEST_PRODUCT = 'UPDATE_GUEST_PRODUCT'
 
-export const addedGuestProduct = products => {
+const addedGuestProduct = products => {
   return {
     type: ADD_GUEST_PRODUCT,
     products
   }
 }
-export const gotGuestProducts = products => {
+
+const gotGuestProducts = products => {
   return {
     type: GOT_GUEST_PRODUCTS,
     products
   }
 }
-
-export const removedGuestProduct = productId => {
+const removedGuestProduct = productId => {
   return {
     type: REMOVE_GUEST_PRODUCT,
     productId
   }
 }
 
-export const removeGuestProduct = (productId, orderId = null) => {
+const updatedGuestProduct = products => {
+  return {
+    type: UPDATE_GUEST_PRODUCT,
+    products
+  }
+}
+
+export const updateGuestProduct = (productId, newQuantity) => {
   var cartProducts = JSON.parse(localStorage.getItem('cartProducts')) || {}
   cartProducts = {...cartProducts}
-  // if (Object.keys(cartProducts).length) {
+  if (!newQuantity) {
+    delete cartProducts[productId]
+  } else {
+    cartProducts[productId].quantity = newQuantity
+  }
+  localStorage.setItem('cartProducts', JSON.stringify(cartProducts))
+  return updatedGuestProduct(cartProducts)
+}
+
+export const removeGuestProduct = productId => {
+  var cartProducts = JSON.parse(localStorage.getItem('cartProducts')) || {}
+  cartProducts = {...cartProducts}
   delete cartProducts[productId]
   localStorage.setItem('cartProducts', JSON.stringify(cartProducts))
-  // }
   return removedGuestProduct(productId)
 }
 
 export const addGuestProductToCart = product => {
   var cartProducts = JSON.parse(localStorage.getItem('cartProducts')) || {}
   cartProducts = {...cartProducts}
-  console.log('cartProducts', cartProducts)
   if (cartProducts[product.id]) {
     cartProducts[product.id].quantity += 1
   } else {
@@ -43,9 +60,6 @@ export const addGuestProductToCart = product => {
     cartProducts[product.id] = product
   }
   localStorage.setItem('cartProducts', JSON.stringify(cartProducts))
-  console.log(localStorage.getItem('cartProducts'))
-  console.log('reached end of thunk')
-  console.log('Product', cartProducts[product.id].quantity)
   return addedGuestProduct(cartProducts)
 }
 
@@ -69,6 +83,8 @@ export default (state = initialState, action) => {
       var newState = JSON.parse(JSON.stringify(state))
       delete newState[action.productId]
       return newState
+    case UPDATE_GUEST_PRODUCT:
+      return action.products
     default:
       return state
   }

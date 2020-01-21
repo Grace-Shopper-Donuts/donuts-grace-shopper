@@ -3,15 +3,20 @@ import ProductThumb from './ProductThumb'
 import {connect} from 'react-redux'
 import {getAllProducts} from '../store/reducers/allProducts'
 import {addOrderProductToCart} from '../store/reducers/cartProducts'
+import {addGuestProductToCart} from '../store/reducers/guestCartProducts'
 
 export class AllProducts extends React.Component {
   componentDidMount() {
     this.props.getAllProducts()
   }
 
-  addToCart(id) {
+  addToCart(idOrProduct) {
     event.preventDefault()
-    this.props.addOrderProductToCart(id)
+    if (this.props.isLoggedIn) {
+      this.props.addOrderProductToCart(idOrProduct)
+    } else {
+      this.props.addGuestProductToCart(idOrProduct)
+    }
   }
 
   render() {
@@ -22,7 +27,11 @@ export class AllProducts extends React.Component {
             <ProductThumb
               key={product.id}
               product={product}
-              addToCart={() => this.addToCart(product.id)}
+              addToCart={
+                this.props.isLoggedIn
+                  ? () => this.addToCart(product.id)
+                  : () => this.addToCart(product)
+              }
             />
           )
         })}
@@ -40,7 +49,8 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     getAllProducts: () => dispatch(getAllProducts()),
-    addOrderProductToCart: id => dispatch(addOrderProductToCart(id))
+    addOrderProductToCart: id => dispatch(addOrderProductToCart(id)),
+    addGuestProductToCart: product => dispatch(addGuestProductToCart(product))
   }
 }
 
