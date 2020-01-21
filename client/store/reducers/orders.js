@@ -1,4 +1,5 @@
 import axios from 'axios'
+import history from '../../history'
 
 const initialState = []
 
@@ -25,6 +26,7 @@ export const checkoutCart = (orderId, userId, cartProducts) => {
   return async dispatch => {
     await axios.put(`/api/orders/checkout`, {orderId, userId, cartProducts})
     dispatch(getPastOrders(userId))
+    history.push('/orderConfirmation')
   }
 }
 

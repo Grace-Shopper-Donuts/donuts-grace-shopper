@@ -26,3 +26,21 @@ router.get('/:id', async (req, res, next) => {
     next(err)
   }
 })
+
+router.put('/:id', async (req, res, next) => {
+  try {
+    const userInfo = req.body
+    console.log('USERINFO', userInfo)
+    const [numRows, affectedRows] = await User.update(userInfo, {
+      where: {
+        id: req.user.id
+      },
+      returning: true,
+      plain: true
+    })
+    console.log(numRows, affectedRows)
+    res.status(200).json(affectedRows)
+  } catch (error) {
+    next(error)
+  }
+})

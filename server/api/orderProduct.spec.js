@@ -42,12 +42,13 @@ describe('OrderProduct routes', () => {
     it('GET /api/orderProduct', async () => {
       const res = await request(app)
         .get('/api/orderProduct')
-        .expect(200)
+        .expect(401)
 
-      expect(res.body).to.be.an('array')
-      expect(res.body[0].orderId).to.be.equal(1)
-      expect(res.body[0].productId).to.be.equal(1)
-      expect(res.body[0].quantity).to.be.equal(1)
+      // TODO: integrate user and admin checks
+      // expect(res.body).to.be.an('array')
+      // expect(res.body[0].orderId).to.be.equal(1)
+      // expect(res.body[0].productId).to.be.equal(1)
+      // expect(res.body[0].quantity).to.be.equal(1)
     })
   })
 })

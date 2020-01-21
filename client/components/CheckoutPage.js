@@ -1,7 +1,8 @@
-import React from 'React'
+import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {checkoutCart} from '../store/reducers/orders'
+import {getCartProducts} from '../store/reducers/cartProducts'
 
 class CheckoutPage extends React.Component {
   constructor() {
@@ -27,35 +28,17 @@ class CheckoutPage extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentDidMount() {
-    // this.props.getCartProducts()
-  }
-
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value
     })
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault()
-    const {user, cartProducts, checkoutCart} = this.props
-    checkoutCart(cartProducts[0].orderId, user.id, cartProducts)
-    this.setState({
-      shippingInfo: {
-        address: '',
-        city: '',
-        state: '',
-        zipCode: '',
-        country: ''
-      },
-      paymentInfo: {
-        cardNumber: '',
-        expiration: '',
-        securityCode: '',
-        promoCode: ''
-      }
-    })
+    const {user, cartProducts, checkoutCart, getCartProducts} = this.props
+    await checkoutCart(cartProducts[0].orderId, user.id, cartProducts)
+    await getCartProducts()
   }
 
   render() {
@@ -208,7 +191,8 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     checkoutCart: (orderId, userId, cartProducts) =>
-      dispatch(checkoutCart(orderId, userId, cartProducts))
+      dispatch(checkoutCart(orderId, userId, cartProducts)),
+    getCartProducts: () => dispatch(getCartProducts())
   }
 }
 
