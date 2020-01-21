@@ -10,10 +10,11 @@ export const CartProduct = props => {
   return (
     <div className={`cartProduct${index}`}>
       <Link to={`/products/${productId}`}>
-        <img src={product.imgPath} />
+        <img src={`/${product.imgPath}`} />
       </Link>
       <h3>{product.name}</h3>
       <h3>{product.manufacturer}</h3>
+      <h3>${product.price / 100}</h3>
       <h3>Quantity: {orderProduct.quantity}</h3>
       <div>
         <button
