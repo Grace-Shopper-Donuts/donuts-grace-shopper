@@ -22,13 +22,14 @@ export const removedGuestProduct = productId => {
   }
 }
 
-export const removeGuestProduct = productId => {
+export const removeGuestProduct = (productId, orderId = null) => {
   var cartProducts = JSON.parse(localStorage.getItem('cartProducts')) || {}
   cartProducts = {...cartProducts}
-  if (Object.keys(cartProducts).length) {
-    delete cartProducts[productId]
-    localStorage.setItem('cartProducts', JSON.stringify(cartProducts))
-  }
+  // if (Object.keys(cartProducts).length) {
+  delete cartProducts[productId]
+  localStorage.setItem('cartProducts', JSON.stringify(cartProducts))
+  // }
+  return removedGuestProduct(productId)
 }
 
 export const addGuestProductToCart = product => {
@@ -50,7 +51,6 @@ export const addGuestProductToCart = product => {
 
 export const getGuestCartProducts = () => {
   var products = localStorage.getItem('cartProducts') || {}
-  console.log('In Reducer:', products)
   if (Object.keys(products).length) {
     products = JSON.parse(products)
   }
@@ -69,8 +69,6 @@ export default (state = initialState, action) => {
       var newState = JSON.parse(JSON.stringify(state))
       delete newState[action.productId]
       return newState
-    // case SEND_EMPTY_CART:
-    //   return []
     default:
       return state
   }

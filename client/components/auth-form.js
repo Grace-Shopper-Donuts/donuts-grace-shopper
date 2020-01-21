@@ -94,7 +94,6 @@ const mapDispatchSignup = dispatch => {
     }
   }
 }
-
 const mapDispatchLogin = dispatch => {
   return {
     handleSubmit(evt) {
@@ -108,7 +107,6 @@ const mapDispatchLogin = dispatch => {
     }
   }
 }
-
 export const Login = connect(mapLogin, mapDispatchLogin)(AuthForm)
 export const Signup = connect(mapSignup, mapDispatchSignup)(AuthForm)
 
