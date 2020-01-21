@@ -5,6 +5,8 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn, cartProducts, guestCartProducts}) => {
+  console.log('GuestCartProducts:', Object.keys(guestCartProducts))
+  console.log('GCP Length', Object.keys(guestCartProducts).length)
   var cartQuantity
   if (isLoggedIn) {
     cartQuantity = cartProducts.reduce((a, b) => a + b.quantity, 0)
