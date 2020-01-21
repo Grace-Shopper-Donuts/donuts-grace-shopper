@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {getAllProducts} from '../store/reducers/allProducts'
 import {addOrderProductToCart} from '../store/reducers/cartProducts'
 
-class AllProducts extends React.Component {
+export class AllProducts extends React.Component {
   componentDidMount() {
     this.props.getAllProducts()
   }

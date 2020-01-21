@@ -4,7 +4,6 @@ import history from '../../history'
 // ACTION TYPES
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
-// const UPDATE_USER_INFO = 'UPDATE_USER_INFO'
 
 // INITIAL STATE
 const defaultUser = {}
@@ -12,7 +11,6 @@ const defaultUser = {}
 // ACTION CREATORS
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
-// const updateUserInfo = () ... just call getUser?
 
 // THUNK CREATORS
 export const me = () => async dispatch => {
@@ -31,10 +29,10 @@ export const updateUserInfo = (userId, userInfo) => {
   }
 }
 
-export const auth = (email, password, method) => async dispatch => {
+export const auth = (userInfo, method) => async dispatch => {
   let res
   try {
-    res = await axios.post(`/auth/${method}`, {email, password})
+    res = await axios.post(`/auth/${method}`, userInfo)
   } catch (authError) {
     return dispatch(getUser({error: authError}))
   }

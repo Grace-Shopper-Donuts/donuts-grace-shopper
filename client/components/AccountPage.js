@@ -45,8 +45,6 @@ class AccountPage extends React.Component {
     e.preventDefault()
     const userId = this.props.user.id
     const {userInfo} = this.state
-    console.log('STATE', this.state)
-    console.log(userId, userInfo)
     this.props.updateUserInfo(userId, userInfo)
     this.setState({
       editable: false,

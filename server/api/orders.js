@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const {Order, Product, User, OrderProduct} = require('../db/models')
+const makeStripeCharge = require('../stripe.js')
 module.exports = router
 
 // get all orders if administrator
@@ -69,34 +70,41 @@ router.get('/user/:userId', async (req, res, next) => {
 router.put('/checkout', async (req, res, next) => {
   try {
     const {orderId, userId, cartProducts} = req.body
+    const totalPrice = cartProducts.reduce(
+      (a, b) => Number(a) + Number(b.product.price),
+      0
+    )
 
     const order = await Order.findByPk(orderId)
-
-    cartProducts.forEach(async orderProduct => {
-      const product = orderProduct.product
-      await OrderProduct.update(
-        {
-          checkoutPrice: product.price
-        },
-        {
-          where: {
-            orderId: orderId,
-            productId: orderProduct.productId
+    const chargeResponse = await makeStripeCharge(totalPrice, req.user.email)
+    if (chargeResponse.paid) {
+      cartProducts.forEach(async orderProduct => {
+        const product = orderProduct.product
+        await OrderProduct.update(
+          {
+            checkoutPrice: product.price
+          },
+          {
+            where: {
+              orderId: orderId,
+              productId: orderProduct.productId
+            }
           }
-        }
-      )
-    })
+        )
+      })
 
-    await order.update({
-      completed: true
-    })
+      await order.update({
+        completed: true
+      })
 
-    await Order.create({
-      userId: userId,
-      completed: false
-    })
-
-    res.sendStatus(200)
+      await Order.create({
+        userId: userId,
+        completed: false
+      })
+      res.sendStatus(200)
+    } else {
+      res.sendStatus(401)
+    }
   } catch (err) {
     next(err)
   }
