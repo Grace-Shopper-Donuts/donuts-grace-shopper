@@ -10,13 +10,18 @@ export const CartProduct = props => {
     isLoggedIn
   } = props
 
+  console.log('GUEST PRODUCT', product)
+  console.log('ISLOGGEDIN', isLoggedIn)
+
   const orderProduct = product
-  console.log('Is logged in?', isLoggedIn)
+
   if (isLoggedIn) {
     product = product.product
+    var {productId, orderId} = orderProduct
+  } else {
+    var productId = product.id
   }
-  console.log('Product:', product)
-  const {productId, orderId} = orderProduct
+
   return (
     <div className={`cartProduct${index}`}>
       <Link to={`/products/${productId}`}>
