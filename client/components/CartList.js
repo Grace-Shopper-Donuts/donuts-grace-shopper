@@ -14,11 +14,8 @@ import {Link} from 'react-router-dom'
 
 class CartList extends React.Component {
   componentDidMount() {
-    if (this.props.isLoggedIn) {
-      this.props.getCartProducts()
-    } else {
-      this.props.getGuestCartProducts()
-    }
+    this.props.getCartProducts()
+    this.props.getGuestCartProducts()
   }
 
   render() {
@@ -26,14 +23,15 @@ class CartList extends React.Component {
       cartProducts,
       deleteCartProduct,
       updateCartProductQuantity,
-      removeGuestProduct
+      removeGuestProduct,
+      isLoggedIn
     } = this.props
     console.log('GC', this.props.guestCartProducts)
     console.log('CartProducts', cartProducts)
     return (
       <div id="cartListPage">
         <div id="cartListLeft">
-          {this.props.isLoggedIn
+          {isLoggedIn
             ? cartProducts.map((product, index) => {
                 return (
                   <CartProduct
@@ -42,6 +40,7 @@ class CartList extends React.Component {
                     product={product}
                     deleteCartProduct={deleteCartProduct}
                     updateCartProductQuantity={updateCartProductQuantity}
+                    isLoggedIn
                   />
                 )
               })
@@ -54,6 +53,7 @@ class CartList extends React.Component {
                       product={product}
                       deleteCartProduct={removeGuestProduct}
                       updatecartProductQuantity
+                      isLoggedIn={false}
                     />
                   )
                 }
