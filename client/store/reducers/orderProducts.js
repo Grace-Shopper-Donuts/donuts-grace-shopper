@@ -10,26 +10,6 @@ const gotOrderProducts = orderProducts => ({
   orderProducts
 })
 
-export const addedGuestProduct = product => {
-  return {
-    type: ADD_ORDER_PRODUCT,
-    product
-  }
-}
-
-export const addGuestProductToCart = product => {
-  var cartProducts = JSON.parse(localStorage.getItem('cartProducts')) || {}
-  cartProducts = {...cartProducts}
-  if (cartProducts[product.id]) {
-    cartProducts[product.id].quantity += 1
-  } else {
-    cartProducts[product.id.toString()] = product
-  }
-  localStorage.setItem('cartProducts', JSON.stringify(cartProducts))
-  console.log(localStorage.getItem('cartProducts'))
-  return addedGuestProduct(product)
-}
-
 export const getOrderProducts = orderId => {
   return async dispatch => {
     try {
@@ -55,11 +35,6 @@ export const getCartProducts = () => {
       console.log(err)
     }
   }
-}
-
-export const getGuestCartProducts = () => {
-  const products = localStorage.getItem('cartProducts') || {}
-  return gotCartProducts(products)
 }
 
 export const deleteCartProduct = (productId, orderId) => {

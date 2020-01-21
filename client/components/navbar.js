@@ -4,8 +4,17 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
-const Navbar = ({handleClick, isLoggedIn, cartProducts}) => {
-  const cartQuantity = cartProducts.reduce((a, b) => a + b.quantity, 0)
+const Navbar = ({handleClick, isLoggedIn, cartProducts, guestCartProducts}) => {
+  console.log('GuestCartProducts:', Object.keys(guestCartProducts))
+  console.log('GCP Length', Object.keys(guestCartProducts).length)
+  var cartQuantity
+  if (isLoggedIn) {
+    cartQuantity = cartProducts.reduce((a, b) => a + b.quantity, 0)
+  }
+  const numItemsInGuestCart = Object.values(guestCartProducts).reduce(
+    (a, b) => a + b.quantity,
+    0
+  )
   return (
     <div>
       <nav id="navbar">
@@ -49,7 +58,7 @@ const Navbar = ({handleClick, isLoggedIn, cartProducts}) => {
             <Link to="/cart">
               <div id="cartIconAndCount" className="navRightSub">
                 <img src="cartIcon.png" className="cartIcon" />
-                <div className="cartCount">{cartQuantity}</div>
+                <div className="cartCount">{numItemsInGuestCart}</div>
               </div>
             </Link>
           </div>
@@ -68,7 +77,8 @@ const Navbar = ({handleClick, isLoggedIn, cartProducts}) => {
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
-    cartProducts: state.cartProducts
+    cartProducts: state.cartProducts,
+    guestCartProducts: state.guestCartProducts
   }
 }
 

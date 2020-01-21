@@ -5,34 +5,59 @@ import {
   deleteCartProduct,
   updateCartProductQuantity
 } from '../store/reducers/cartProducts'
+import {
+  getGuestCartProducts,
+  removeGuestProduct
+} from '../store/reducers/guestCartProducts'
 import CartProduct from './CartProduct'
 import {Link} from 'react-router-dom'
 
 class CartList extends React.Component {
   componentDidMount() {
-    this.props.getCartProducts()
+    if (this.props.isLoggedIn) {
+      this.props.getCartProducts()
+    } else {
+      this.props.getGuestCartProducts()
+    }
   }
 
   render() {
     const {
       cartProducts,
       deleteCartProduct,
-      updateCartProductQuantity
+      updateCartProductQuantity,
+      removeGuestProduct
     } = this.props
+    console.log('GC', this.props.guestCartProducts)
+    console.log('CartProducts', cartProducts)
     return (
       <div id="cartListPage">
         <div id="cartListLeft">
-          {cartProducts.map((product, index) => {
-            return (
-              <CartProduct
-                key={product.productId}
-                index={index % 2}
-                product={product}
-                deleteCartProduct={deleteCartProduct}
-                updateCartProductQuantity={updateCartProductQuantity}
-              />
-            )
-          })}
+          {this.props.isLoggedIn
+            ? cartProducts.map((product, index) => {
+                return (
+                  <CartProduct
+                    key={product.productId}
+                    index={index % 2}
+                    product={product}
+                    deleteCartProduct={deleteCartProduct}
+                    updateCartProductQuantity={updateCartProductQuantity}
+                  />
+                )
+              })
+            : Object.values(this.props.guestCartProducts).map(
+                (product, index) => {
+                  return (
+                    <CartProduct
+                      key={product.id}
+                      index={index % 2}
+                      product={product}
+                      deleteCartProduct={removeGuestProduct}
+                      updatecartProductQuantity
+                    />
+                  )
+                }
+              )}
         </div>
         <div id="cartListRight">
           <h1>Cart Details</h1>
@@ -59,7 +84,9 @@ class CartList extends React.Component {
 
 const mapState = state => {
   return {
-    cartProducts: state.cartProducts
+    cartProducts: state.cartProducts,
+    guestCartProducts: state.guestCartProducts,
+    isLoggedIn: !!state.user.id
   }
 }
 
@@ -69,7 +96,9 @@ const mapDispatch = dispatch => {
     deleteCartProduct: (productId, orderId) =>
       dispatch(deleteCartProduct(productId, orderId)),
     updateCartProductQuantity: (productId, orderId, newQuantity) =>
-      dispatch(updateCartProductQuantity(productId, orderId, newQuantity))
+      dispatch(updateCartProductQuantity(productId, orderId, newQuantity)),
+    getGuestCartProducts: () => dispatch(getGuestCartProducts()),
+    removeGuestProduct: productId => dispatch(removeGuestProduct(productId))
   }
 }
 

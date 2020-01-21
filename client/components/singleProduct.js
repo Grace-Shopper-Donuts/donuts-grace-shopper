@@ -2,11 +2,11 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {getSingleProduct} from '../store/reducers/singleProduct'
+import {addOrderProductToCart} from '../store/reducers/cartProducts'
 import {
-  addOrderProductToCart,
   addGuestProductToCart,
   getGuestCartProducts
-} from '../store/reducers/orderProducts'
+} from '../store/reducers/guestCartProducts'
 
 class SingleProduct extends React.Component {
   constructor(props) {
@@ -24,8 +24,9 @@ class SingleProduct extends React.Component {
     if (this.props.isLoggedIn) {
       this.props.addOrderProductToCart()
     } else {
-      console.log(addGuestProductToCart(this.props.currentProduct))
-      addGuestProductToCart(this.props.currentProduct)
+      console.log('adding guest product to cart...')
+      console.log('current', this.props.currentProduct)
+      this.props.addGuestProductToCart(this.props.currentProduct)
     }
   }
 
@@ -76,7 +77,11 @@ const mapDispatch = (dispatch, ownProps) => {
     getSingleProduct: () => dispatch(getSingleProduct(id)),
     addOrderProductToCart: () => dispatch(addOrderProductToCart(id)),
     getGuestCartProducts: () => dispatch(getGuestCartProducts()),
-    addGuestProductToCart: product => dispatch(addGuestProductToCart(product))
+    addGuestProductToCart(product) {
+      console.log('reached this point')
+      dispatch(addGuestProductToCart(product))
+      console.log('dispatched')
+    }
   }
 }
 

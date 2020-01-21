@@ -74,6 +74,7 @@ export const updateCartProductQuantity = (productId, orderId, newQuantity) => {
 export default (state = initialState, action) => {
   switch (action.type) {
     case ADD_ORDER_PRODUCT:
+      console.log('reducer state length:', [...state, action.product].length)
       return [...state, action.product]
     case GOT_CART_PRODUCTS:
       return action.cartProducts

@@ -2,11 +2,18 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 export const CartProduct = props => {
-  let {product, index, deleteCartProduct, updateCartProductQuantity} = props
+  let {
+    product,
+    index,
+    deleteCartProduct,
+    updateCartProductQuantity,
+    isLoggedIn
+  } = props
   const orderProduct = product
   const {productId, orderId} = orderProduct
-  product = product.product
-
+  if (isLoggedIn) {
+    product = product.product
+  }
   return (
     <div className={`cartProduct${index}`}>
       <Link to={`/products/${productId}`}>
