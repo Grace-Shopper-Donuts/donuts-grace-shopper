@@ -26,6 +26,8 @@ class CartList extends React.Component {
       removeGuestProduct,
       isLoggedIn
     } = this.props
+    console.log('GC', this.props.guestCartProducts)
+    console.log('CartProducts', cartProducts)
     return (
       <div id="cartListPage">
         <div id="cartListLeft">
