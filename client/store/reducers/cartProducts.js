@@ -74,7 +74,7 @@ export const updateCartProductQuantity = (productId, orderId, newQuantity) => {
 export default (state = initialState, action) => {
   switch (action.type) {
     case ADD_ORDER_PRODUCT:
-      return [...state, action.product]
+      return [...state]
     case GOT_CART_PRODUCTS:
       return action.cartProducts
     // case SEND_EMPTY_CART:

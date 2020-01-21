@@ -12,6 +12,7 @@ import OrderHistory from './components/OrderHistory'
 import CartList from './components/CartList'
 import CheckoutPage from './components/CheckoutPage'
 import {getCartProducts} from './store/reducers/cartProducts'
+import {getGuestCartProducts} from './store/reducers/guestCartProducts'
 import OrderConfirmation from './components/OrderConfirmation'
 
 /**
@@ -19,7 +20,11 @@ import OrderConfirmation from './components/OrderConfirmation'
  */
 class Routes extends Component {
   componentDidMount() {
-    this.props.loadInitialData()
+    if (this.props.isLoggedIn) {
+      this.props.loadInitialData()
+    } else {
+      this.props.loadGuestData()
+    }
   }
 
   render() {
@@ -66,6 +71,10 @@ const mapDispatch = dispatch => {
     loadInitialData() {
       dispatch(me())
       dispatch(getCartProducts())
+    },
+    loadGuestData() {
+      dispatch(me())
+      dispatch(getGuestCartProducts())
     }
   }
 }
