@@ -121,12 +121,24 @@ form div {
 #homepage {
   margin-top: 180px;
   display: flex;
-  width: 75vw;
-  justify-content: space-around;
-  animation: 3s slidein;
+  flex-direction: column;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  animation-name: fadeIn;
+  animation-duration: 2.5s;
+  animation-iteration-count: 1;
 }
 
-#homepagePerson {
+#homepage h1 {
+  font-size: 75px;
+}
+
+#homepage h2 {
+  font-size: 50px;
+}
+
+/* #homepagePerson {
   width: 32vw;
   height: 40vw;
   animation-name: homePageSlideUp;
@@ -142,7 +154,7 @@ form div {
   animation-name: fadeIn;
   animation-duration: 2.5s;
   animation-iteration-count: 1;
-}
+} */
 
 #accountPage {
   display: flex;
@@ -579,9 +591,9 @@ form div {
   0% {
     opacity: 0%;
   }
-  60% {
+  /* 60% {
     opacity: 0%;
-  }
+  } */
   100% {
     opacity: 100%;
   }

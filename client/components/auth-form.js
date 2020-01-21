@@ -3,9 +3,6 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
 
-/**
- * COMPONENT
- */
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
@@ -24,24 +21,30 @@ const AuthForm = props => {
           </label>
           <input name="password" type="password" />
         </div>
-        <div>
-          <label htmlFor="firstName">
-            <small>First Name</small>
-          </label>
-          <input name="firstName" type="firstName" />
-        </div>
-        <div>
-          <label htmlFor="lastName">
-            <small>Last Name</small>
-          </label>
-          <input name="lastName" type="lastName" />
-        </div>
-        <div>
-          <label htmlFor="address">
-            <small>Address</small>
-          </label>
-          <input name="address" type="address" />
-        </div>
+        {displayName === 'Sign Up' ? (
+          <div>
+            <div>
+              <label htmlFor="firstName">
+                <small>First Name</small>
+              </label>
+              <input name="firstName" type="firstName" />
+            </div>
+            <div>
+              <label htmlFor="lastName">
+                <small>Last Name</small>
+              </label>
+              <input name="lastName" type="lastName" />
+            </div>
+            <div>
+              <label htmlFor="address">
+                <small>Address</small>
+              </label>
+              <input name="address" type="address" />
+            </div>
+          </div>
+        ) : (
+          ''
+        )}
         <div>
           <button type="submit">{displayName}</button>
         </div>
