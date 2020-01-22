@@ -81,6 +81,8 @@ router.put('/checkout', async (req, res, next) => {
       })
     }
     orderId = ord.id
+  } else {
+    orderId = req.body.orderId
   }
   try {
     const {userId, cartProducts} = req.body
