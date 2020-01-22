@@ -28,10 +28,8 @@ export const checkoutCart = (orderId, userId, cartProducts) => {
   return async dispatch => {
     await axios.put(`/api/orders/checkout`, {orderId, userId, cartProducts})
     if (orderId) {
-      console.log('Apple')
       dispatch(getCartProducts())
     } else {
-      console.log('banana')
       dispatch(getGuestCartProducts())
     }
     history.push('/orderConfirmation')

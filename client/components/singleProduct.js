@@ -20,7 +20,6 @@ class SingleProduct extends React.Component {
 
   addToCart() {
     event.preventDefault()
-    console.log(this.props.isLoggedIn)
     if (this.props.isLoggedIn) {
       this.props.addOrderProductToCart()
     } else {

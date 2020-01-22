@@ -89,7 +89,6 @@ class CheckoutPage extends React.Component {
       }
       checkoutProducts = restructured
     } else checkoutProducts = this.props.cartProducts
-    console.log('Checkout Products', checkoutProducts)
     // const {cartProducts} = this.props
     const {shippingInfo, paymentInfo} = this.state
     return (
