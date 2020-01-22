@@ -37,7 +37,6 @@ router.get('/:id', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-    console.log('IM IN THE PUT ROUTE', req.user.id)
     if (
       req.user &&
       (req.user.id === Number(req.params.id) || req.user.isAdmin)

@@ -39,7 +39,6 @@ class AccountPage extends React.Component {
         [e.target.name]: e.target.value
       }
     })
-    console.log(this.state)
   }
 
   async handleSubmit(e) {

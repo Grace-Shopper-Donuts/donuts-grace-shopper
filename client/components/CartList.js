@@ -32,8 +32,6 @@ class CartList extends React.Component {
       isLoggedIn
     } = this.props
 
-    console.log(updateGuestProduct)
-
     return (
       <div id="cartListPage">
         <div id="cartListLeft">

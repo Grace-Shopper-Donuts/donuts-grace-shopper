@@ -10,9 +10,6 @@ export const CartProduct = props => {
     isLoggedIn
   } = props
 
-  console.log('GUEST PRODUCT', product)
-  console.log('ISLOGGEDIN', isLoggedIn)
-
   const orderProduct = product
 
   if (isLoggedIn) {
