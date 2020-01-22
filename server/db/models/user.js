@@ -6,7 +6,9 @@ const User = db.define('user', {
   firstName: {
     type: Sequelize.STRING,
     allowNull: false,
-    isEmpty: false
+    validate: {
+      isEmpty: false
+    }
   },
   lastName: {
     type: Sequelize.STRING,
@@ -16,7 +18,9 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false,
-    isEmail: true
+    validate: {
+      isEmail: true
+    }
   },
   address: {
     type: Sequelize.STRING,
