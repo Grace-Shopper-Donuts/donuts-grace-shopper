@@ -24,6 +24,7 @@ export const getPastOrders = userId => {
 
 export const checkoutCart = (orderId, userId, cartProducts) => {
   return async dispatch => {
+    console.log('CARTPRODUCTS', cartProducts)
     await axios.put(`/api/orders/checkout`, {orderId, userId, cartProducts})
     dispatch(getPastOrders(userId))
     history.push('/orderConfirmation')

@@ -11,6 +11,13 @@ async function seed() {
 
   console.log('db synced!')
 
+  const guest = await User.create({
+    firstName: 'Guest',
+    lastName: 'Guest',
+    email: 'jdoe@guest.com',
+    password: 'cwKnXOhuR8sOkea3wCzKLpqfUJyTsrm29JQPnuf6Fm0W4L3aAXFDB5Im20Ni90eA' // randomized 64-length string
+  })
+
   const users = await Promise.all([
     User.create({
       firstName: 'John',
@@ -145,7 +152,7 @@ async function seed() {
     })
   ])
 
-  console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${users.length + 1} users`) // add guest
   console.log(`seeded ${products.length} products`)
   console.log(`seeded ${orders.length} orders`)
   console.log(`seeded ${orderProducts.length} orderProducts`)

@@ -24,7 +24,9 @@ router.get('/', async (req, res, next) => {
 
 router.get('/cart', async (req, res, next) => {
   try {
-    const id = req.user.id
+    let id
+    if (req.user) id = req.user.id
+    else id = 1
     let currentOrder = await Order.findAll({
       where: {
         userId: id,
