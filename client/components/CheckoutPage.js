@@ -36,13 +36,64 @@ class CheckoutPage extends React.Component {
 
   async handleSubmit(e) {
     e.preventDefault()
-    const {user, cartProducts, checkoutCart, getCartProducts} = this.props
-    await checkoutCart(cartProducts[0].orderId, user.id, cartProducts)
+
+    let checkoutProducts
+    if (!this.props.isLoggedIn) {
+      const valArr = Object.values(this.props.guestCartProducts)
+      const restructured = []
+      console.log('VALARR', valArr)
+      for (let i = 0; i < valArr.length; i++) {
+        restructured.push({
+          quantity: valArr[i].quantity,
+          productId: valArr[i].id,
+          product: {
+            id: valArr[i].id,
+            name: valArr[i].name,
+            manufacturer: valArr[i].manufacturer,
+            price: valArr[i].price,
+            stock: valArr[i].stock,
+            description: valArr[i].description,
+            imgPath: valArr[i].imgPath
+          }
+        })
+      }
+      checkoutProducts = restructured
+    } else checkoutProducts = this.props.cartProducts
+
+    // const {user, cartProducts, checkoutCart, getCartProducts} = this.props
+    const {user, checkoutCart, getCartProducts} = this.props
+    // await checkoutCart(cartProducts[0].orderId, user.id, cartProducts)
+    const orderId = this.props.isLoggedIn
+      ? checkoutProducts[0].orderId
+      : undefined
+    await checkoutCart(orderId, 1, checkoutProducts) // guests will use user id 0
     await getCartProducts()
   }
 
   render() {
-    const {cartProducts} = this.props
+    let checkoutProducts
+    if (!this.props.isLoggedIn) {
+      const valArr = Object.values(this.props.guestCartProducts)
+      const restructured = []
+      for (let i = 0; i < valArr.length; i++) {
+        restructured.push({
+          quantity: valArr[i].quantity,
+          productId: valArr[i].productId,
+          product: {
+            id: valArr[i].id,
+            name: valArr[i].name,
+            manufacturer: valArr[i].manufacturer,
+            price: valArr[i].price,
+            stock: valArr[i].stock,
+            description: valArr[i].description,
+            imgPath: valArr[i].imgPath
+          }
+        })
+      }
+      checkoutProducts = restructured
+    } else checkoutProducts = this.props.cartProducts
+    console.log('Checkout Products', checkoutProducts)
+    // const {cartProducts} = this.props
     const {shippingInfo, paymentInfo} = this.state
     return (
       <form onSubmit={this.handleSubmit} id="checkoutPage">
@@ -146,7 +197,7 @@ class CheckoutPage extends React.Component {
           <div id="checkoutReviewOrder">
             <h2>Review Items</h2>
             <ol>
-              {cartProducts.map(product => {
+              {checkoutProducts.map(product => {
                 return (
                   <li key={product.productId} className="checkoutListItem">
                     <p>{product.product.name}</p>
@@ -164,12 +215,12 @@ class CheckoutPage extends React.Component {
             <button type="button">Return to Cart</button>
           </Link>
           <h2>Order Summary</h2>
-          <h3>Number of items: {cartProducts.length}</h3>
+          <h3>Number of items: {checkoutProducts.length}</h3>
           <h3>Shipping: $0.00</h3>
           <h3>Tax: $0.00</h3>
           <h2 id="cehckoutPageTotal">
             Order Total: $
-            {cartProducts.reduce(
+            {checkoutProducts.reduce(
               (a, b) => Number(a) + Number(b.product.price),
               0
             ) / 100}
@@ -184,6 +235,8 @@ class CheckoutPage extends React.Component {
 const mapState = state => {
   return {
     cartProducts: state.cartProducts,
+    guestCartProducts: state.guestCartProducts,
+    isLoggedIn: !!state.user.id,
     user: state.user
   }
 }
