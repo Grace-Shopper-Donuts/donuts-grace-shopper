@@ -67,6 +67,7 @@ class CheckoutPage extends React.Component {
       ? checkoutProducts[0].orderId
       : undefined
     await checkoutCart(orderId, 1, checkoutProducts) // guests will use user id 0
+    localStorage.setItem('cartProducts', '{}')
     await getCartProducts()
   }
 
