@@ -61,10 +61,17 @@ router.get('/order/:orderId', async (req, res, next) => {
       include: [
         {
           model: Product
+        },
+        {
+          model: Order
         }
       ]
     })
-    res.json(orderProducts)
+    if (req.user.isAdmin || req.user.id === orderProducts[0].order.userId) {
+      res.json(orderProducts)
+    } else {
+      res.sendStatus(401)
+    }
   } catch (err) {
     next(err)
   }

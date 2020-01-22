@@ -6,13 +6,14 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const users = await User.findAll({
-      // explicitly select only the id and email fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
-      attributes: ['id', 'email']
-    })
-    res.json(users)
+    if (req.user && req.user.isAdmin) {
+      const users = await User.findAll({
+        attributes: ['id', 'firstName', 'lastName', 'email', 'address']
+      })
+      res.json(users)
+    } else {
+      res.sendStatus(401)
+    }
   } catch (err) {
     next(err)
   }
@@ -20,8 +21,12 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.params.id)
-    res.json(user)
+    if (req.user && (req.user.id === req.params.id || req.user.isAdmin)) {
+      const user = await User.findByPk(req.params.id)
+      res.json(user)
+    } else {
+      res.sendStatus(401)
+    }
   } catch (err) {
     next(err)
   }
@@ -29,17 +34,19 @@ router.get('/:id', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-    const userInfo = req.body
-    console.log('USERINFO', userInfo)
-    const [numRows, affectedRows] = await User.update(userInfo, {
-      where: {
-        id: req.user.id
-      },
-      returning: true,
-      plain: true
-    })
-    console.log(numRows, affectedRows)
-    res.status(200).json(affectedRows)
+    if (req.user && (req.user.id === req.params.id || req.user.isAdmin)) {
+      const userInfo = req.body
+      const [numRows, affectedRows] = await User.update(userInfo, {
+        where: {
+          id: req.user.id
+        },
+        returning: true,
+        plain: true
+      })
+      res.status(200).json(affectedRows)
+    } else {
+      res.sendStatus(401)
+    }
   } catch (error) {
     next(error)
   }

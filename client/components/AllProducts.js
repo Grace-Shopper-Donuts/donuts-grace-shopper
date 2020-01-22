@@ -42,7 +42,8 @@ export class AllProducts extends React.Component {
 
 const mapState = state => {
   return {
-    products: state.allProducts
+    products: state.allProducts,
+    isLoggedIn: !!state.user.id
   }
 }
 
