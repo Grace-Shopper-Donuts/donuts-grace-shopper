@@ -37,8 +37,8 @@ export const CartProduct = props => {
           onClick={() =>
             updateCartProductQuantity(
               productId,
-              orderId,
-              orderProduct.quantity - 1
+              orderProduct.quantity - 1,
+              orderId
             )
           }
         >
@@ -49,8 +49,8 @@ export const CartProduct = props => {
           onClick={() =>
             updateCartProductQuantity(
               productId,
-              orderId,
-              orderProduct.quantity + 1
+              orderProduct.quantity + 1,
+              orderId
             )
           }
         >

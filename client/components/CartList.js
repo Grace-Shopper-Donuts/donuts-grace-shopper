@@ -7,15 +7,19 @@ import {
 } from '../store/reducers/cartProducts'
 import {
   getGuestCartProducts,
-  removeGuestProduct
+  removeGuestProduct,
+  updateGuestProduct
 } from '../store/reducers/guestCartProducts'
 import CartProduct from './CartProduct'
 import {Link} from 'react-router-dom'
 
 class CartList extends React.Component {
   componentDidMount() {
-    this.props.getCartProducts()
-    this.props.getGuestCartProducts()
+    if (this.props.isLoggedIn) {
+      this.props.getCartProducts()
+    } else {
+      this.props.getGuestCartProducts()
+    }
   }
 
   render() {
@@ -24,8 +28,12 @@ class CartList extends React.Component {
       deleteCartProduct,
       updateCartProductQuantity,
       removeGuestProduct,
+      updateGuestProduct,
       isLoggedIn
     } = this.props
+
+    console.log(updateGuestProduct)
+
     return (
       <div id="cartListPage">
         <div id="cartListLeft">
@@ -50,7 +58,7 @@ class CartList extends React.Component {
                       index={index % 2}
                       product={product}
                       deleteCartProduct={removeGuestProduct}
-                      updatecartProductQuantity
+                      updateCartProductQuantity={updateGuestProduct}
                       isLoggedIn={false}
                     />
                   )
@@ -119,7 +127,9 @@ const mapDispatch = dispatch => {
     updateCartProductQuantity: (productId, orderId, newQuantity) =>
       dispatch(updateCartProductQuantity(productId, orderId, newQuantity)),
     getGuestCartProducts: () => dispatch(getGuestCartProducts()),
-    removeGuestProduct: productId => dispatch(removeGuestProduct(productId))
+    removeGuestProduct: productId => dispatch(removeGuestProduct(productId)),
+    updateGuestProduct: (productId, newQuantity) =>
+      dispatch(updateGuestProduct(productId, newQuantity))
   }
 }
 
