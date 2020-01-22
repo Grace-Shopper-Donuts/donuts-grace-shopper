@@ -9,11 +9,9 @@ class OrderConfirmation extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="orderConfirmation">
         <h1>Your order was completed successfully!</h1>
-        <h1>Your order was completed successfully!</h1>
-        <h1>Your order was completed successfully!</h1>
-        <h1>Your order was completed successfully!</h1>
+        <h2>Thank You!</h2>
       </div>
     )
   }

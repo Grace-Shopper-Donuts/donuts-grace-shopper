@@ -21,20 +21,22 @@ export class AllProducts extends React.Component {
 
   render() {
     return (
-      <div id="allProducts">
-        {this.props.products.map(product => {
-          return (
-            <ProductThumb
-              key={product.id}
-              product={product}
-              addToCart={
-                this.props.isLoggedIn
-                  ? () => this.addToCart(product.id)
-                  : () => this.addToCart(product)
-              }
-            />
-          )
-        })}
+      <div id="allProductsContainer">
+        <div id="allProducts">
+          {this.props.products.map(product => {
+            return (
+              <ProductThumb
+                key={product.id}
+                product={product}
+                addToCart={
+                  this.props.isLoggedIn
+                    ? () => this.addToCart(product.id)
+                    : () => this.addToCart(product)
+                }
+              />
+            )
+          })}
+        </div>
       </div>
     )
   }
