@@ -7,9 +7,7 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    let user
-    if (req.user) user = await User.findByPk(req.user.id)
-    if (user && user.isAdmin) {
+    if (req.user && req.user.isAdmin) {
       const orders = await Order.findAll()
       res.json(orders)
     } else {
@@ -59,6 +57,8 @@ router.get('/user/:userId', async (req, res, next) => {
         ]
       })
       res.json(orders)
+    } else {
+      res.sendStatus(401)
     }
   } catch (err) {
     next(err)

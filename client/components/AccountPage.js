@@ -39,20 +39,21 @@ class AccountPage extends React.Component {
         [e.target.name]: e.target.value
       }
     })
+    console.log(this.state)
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault()
     const userId = this.props.user.id
     const {userInfo} = this.state
-    this.props.updateUserInfo(userId, userInfo)
+    await this.props.updateUserInfo(userId, userInfo)
     this.setState({
       editable: false,
       userInfo: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        address: ''
+        firstName: this.props.user.firstName,
+        lastName: this.props.user.lastName,
+        email: this.props.user.email,
+        address: this.props.user.address
       }
     })
   }

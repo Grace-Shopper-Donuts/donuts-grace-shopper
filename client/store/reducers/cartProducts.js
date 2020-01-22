@@ -21,7 +21,7 @@ export const getCartProducts = () => {
       const {data} = await axios.get('/api/orderProduct/cart')
       dispatch(gotCartProducts(data))
     } catch (err) {
-      console.log(err)
+      console.error(err)
     }
   }
 }
@@ -35,7 +35,7 @@ export const addOrderProductToCart = productId => {
       dispatch(addedProduct(data))
       dispatch(getCartProducts())
     } catch (err) {
-      console.log(err)
+      console.error(err)
     }
   }
 }
@@ -46,7 +46,7 @@ export const deleteCartProduct = (productId, orderId) => {
       await axios.delete(`/api/orderProduct/order/${orderId}/${productId}`)
       dispatch(getCartProducts())
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 }
@@ -61,7 +61,7 @@ export const updateCartProductQuantity = (productId, newQuantity, orderId) => {
       })
       dispatch(getCartProducts())
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 }
