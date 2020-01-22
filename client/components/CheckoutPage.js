@@ -41,7 +41,6 @@ class CheckoutPage extends React.Component {
     if (!this.props.isLoggedIn) {
       const valArr = Object.values(this.props.guestCartProducts)
       const restructured = []
-      console.log('VALARR', valArr)
       for (let i = 0; i < valArr.length; i++) {
         restructured.push({
           quantity: valArr[i].quantity,
@@ -93,7 +92,6 @@ class CheckoutPage extends React.Component {
       }
       checkoutProducts = restructured
     } else checkoutProducts = this.props.cartProducts
-    console.log('Checkout Products', checkoutProducts)
     // const {cartProducts} = this.props
     const {shippingInfo, paymentInfo} = this.state
     return (
