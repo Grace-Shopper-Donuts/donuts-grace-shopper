@@ -21,7 +21,10 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
-    if (req.user && (req.user.id === req.params.id || req.user.isAdmin)) {
+    if (
+      req.user &&
+      (req.user.id === Number(req.params.id) || req.user.isAdmin)
+    ) {
       const user = await User.findByPk(req.params.id)
       res.json(user)
     } else {
@@ -34,7 +37,11 @@ router.get('/:id', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-    if (req.user && (req.user.id === req.params.id || req.user.isAdmin)) {
+    console.log('IM IN THE PUT ROUTE', req.user.id)
+    if (
+      req.user &&
+      (req.user.id === Number(req.params.id) || req.user.isAdmin)
+    ) {
       const userInfo = req.body
       const [numRows, affectedRows] = await User.update(userInfo, {
         where: {

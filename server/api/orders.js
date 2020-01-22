@@ -69,65 +69,70 @@ router.get('/user/:userId', async (req, res, next) => {
 
 router.put('/checkout', async (req, res, next) => {
   let orderId
-  if (!req.body.orderId) {
-    const ord = await Order.create({
-      userId: req.body.userId // set to guest; 1
-    })
-    for (let i = 0; i < req.body.cartProducts.length; i++) {
-      await OrderProduct.create({
-        orderId: ord.id,
-        productId: req.body.cartProducts[i].productId,
-        quantity: req.body.cartProducts[i].quantity
-      })
-    }
-    orderId = ord.id
-  } else {
-    orderId = req.body.orderId
-  }
-  try {
-    const {userId, cartProducts} = req.body
-    const totalPrice = cartProducts.reduce(
-      (a, b) => Number(a) + Number(b.product.price),
-      0
-    )
 
-    const order = await Order.findByPk(orderId)
-    let chargeResponse
-    if (req.body.userId !== 1)
-      chargeResponse = await makeStripeCharge(totalPrice, req.user.email)
-    else chargeResponse = {paid: true}
-    if (chargeResponse.paid) {
-      cartProducts.forEach(async orderProduct => {
-        const product = orderProduct.product
-        await OrderProduct.update(
-          {
-            checkoutPrice: product.price
-          },
-          {
-            where: {
-              orderId: orderId,
-              productId: orderProduct.productId
-            }
-          }
-        )
+  if (!req.user) {
+    if (req.body.cartProducts.length) {
+      const order = await Order.create({
+        userId: req.body.userId // set to guest; 1
       })
 
+      for (let i = 0; i < req.body.cartProducts.length; i++) {
+        await OrderProduct.create({
+          orderId: order.id,
+          productId: req.body.cartProducts[i].productId,
+          quantity: req.body.cartProducts[i].quantity
+        })
+      }
       await order.update({
         completed: true
       })
-
-      await Order.create({
-        userId: userId,
-        completed: false
-      })
+      orderId = order.id
       res.sendStatus(200)
-    } else {
-      res.sendStatus(401)
     }
-  } catch (err) {
-    next(err)
+  }
+
+  if (req.user) {
+    if (req.body.cartProducts.length) {
+      orderId = req.body.orderId
+      const {cartProducts} = req.body
+      const userId = req.user.id
+      const totalPrice = cartProducts.reduce(
+        (a, b) => Number(a) + Number(b.product.price),
+        0
+      )
+
+      const order = await Order.findByPk(orderId)
+      let chargeResponse
+      chargeResponse = await makeStripeCharge(totalPrice, req.user.email)
+      if (chargeResponse.paid) {
+        cartProducts.forEach(async orderProduct => {
+          const product = orderProduct.product
+          await OrderProduct.update(
+            {
+              checkoutPrice: product.price
+            },
+            {
+              where: {
+                orderId: orderId,
+                productId: orderProduct.productId
+              }
+            }
+          )
+        })
+
+        await order.update({
+          completed: true
+        })
+
+        await Order.create({
+          userId: userId,
+          completed: false
+        })
+
+        res.sendStatus(200)
+      } else {
+        res.sendStatus(401)
+      }
+    }
   }
 })
-
-// adding a guest order to the database
-router.post('/')
