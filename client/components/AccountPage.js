@@ -10,10 +10,10 @@ class AccountPage extends React.Component {
     this.state = {
       editable: false,
       userInfo: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        address: ''
+        firstName: this.props.user.firstName,
+        lastName: this.props.user.lastName,
+        email: this.props.user.email,
+        address: this.props.user.address
       }
     }
     this.toggleEditable = this.toggleEditable.bind(this)
@@ -60,6 +60,7 @@ class AccountPage extends React.Component {
   render() {
     const {user} = this.props
     const {editable} = this.state
+
     return (
       <form onSubmit={this.handleSubmit} id="accountPage">
         <h1>My Account</h1>
@@ -72,14 +73,14 @@ class AccountPage extends React.Component {
                 name="firstName"
                 className="editabletrue"
                 onChange={this.handleChange}
-                placeholder={user.firstName}
+                value={this.state.userInfo.firstName}
               />
               <input
                 type="text"
                 name="lastName"
                 className="editabletrue"
                 onChange={this.handleChange}
-                placeholder={user.lastName}
+                value={this.state.userInfo.lastName}
               />
             </div>
             <input
@@ -87,14 +88,14 @@ class AccountPage extends React.Component {
               name="email"
               className="editabletrue"
               onChange={this.handleChange}
-              placeholder={user.email}
+              value={this.state.userInfo.email}
             />
             <input
               type="text"
               name="address"
               className="editabletrue"
               onChange={this.handleChange}
-              placeholder={user.address}
+              value={this.state.userInfo.address}
             />
           </div>
         ) : (
