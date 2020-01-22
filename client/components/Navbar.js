@@ -35,12 +35,12 @@ const Navbar = ({handleClick, isLoggedIn, cartProducts, guestCartProducts}) => {
             </div>
             <div className="navRightSub">
               <Link to="/account">
-                <img src="userIcon.png" className="userIcon" />
+                <img src="/userIcon.png" className="userIcon" />
               </Link>
             </div>
             <Link to="/cart">
               <div id="cartIconAndCount" className="navRightSub">
-                <img src="cartIcon.png" className="cartIcon" />
+                <img src="/cartIcon.png" className="cartIcon" />
                 <div className="cartCount">
                   {cartProducts.reduce((a, b) => a + b.quantity, 0)}
                 </div>

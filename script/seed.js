@@ -64,7 +64,7 @@ async function seed() {
       name: 'Violin',
       price: 99.99,
       stock: 6,
-      imgPath: 'images/productImages/violin.jpg'
+      imgPath: 'images/productImages/violin.png'
     }),
     Product.create({
       name: 'Saxophone',
