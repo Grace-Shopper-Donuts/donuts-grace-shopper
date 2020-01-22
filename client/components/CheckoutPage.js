@@ -2,7 +2,6 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {checkoutCart} from '../store/reducers/orders'
-import {getCartProducts} from '../store/reducers/cartProducts'
 
 class CheckoutPage extends React.Component {
   constructor() {
@@ -41,7 +40,6 @@ class CheckoutPage extends React.Component {
     if (!this.props.isLoggedIn) {
       const valArr = Object.values(this.props.guestCartProducts)
       const restructured = []
-      console.log('VALARR', valArr)
       for (let i = 0; i < valArr.length; i++) {
         restructured.push({
           quantity: valArr[i].quantity,
@@ -58,17 +56,15 @@ class CheckoutPage extends React.Component {
         })
       }
       checkoutProducts = restructured
-    } else checkoutProducts = this.props.cartProducts
-
-    // const {user, cartProducts, checkoutCart, getCartProducts} = this.props
-    const {user, checkoutCart, getCartProducts} = this.props
-    // await checkoutCart(cartProducts[0].orderId, user.id, cartProducts)
+    } else {
+      checkoutProducts = this.props.cartProducts
+    }
+    const {checkoutCart} = this.props
     const orderId = this.props.isLoggedIn
       ? checkoutProducts[0].orderId
       : undefined
-    await checkoutCart(orderId, 1, checkoutProducts) // guests will use user id 0
+    await checkoutCart(orderId, 1, checkoutProducts)
     localStorage.setItem('cartProducts', '{}')
-    await getCartProducts()
   }
 
   render() {
@@ -216,13 +212,16 @@ class CheckoutPage extends React.Component {
             <button type="button">Return to Cart</button>
           </Link>
           <h2>Order Summary</h2>
-          <h3>Number of items: {checkoutProducts.length}</h3>
+          <h3>
+            Number of items:{' '}
+            {checkoutProducts.reduce((a, b) => a + b.quantity, 0)}
+          </h3>
           <h3>Shipping: $0.00</h3>
           <h3>Tax: $0.00</h3>
-          <h2 id="cehckoutPageTotal">
+          <h2 id="checkoutPageTotal">
             Order Total: $
             {checkoutProducts.reduce(
-              (a, b) => Number(a) + Number(b.product.price),
+              (a, b) => a + b.product.price * b.quantity,
               0
             ) / 100}
           </h2>

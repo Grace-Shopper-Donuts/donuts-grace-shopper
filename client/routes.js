@@ -15,15 +15,13 @@ import {getCartProducts} from './store/reducers/cartProducts'
 import {getGuestCartProducts} from './store/reducers/guestCartProducts'
 import OrderConfirmation from './components/OrderConfirmation'
 
-/**
- * COMPONENT
- */
 class Routes extends Component {
-  componentDidMount() {
+  async componentDidMount() {
+    await this.props.me()
     if (this.props.isLoggedIn) {
-      this.props.loadInitialData()
+      this.props.getCartProducts()
     } else {
-      this.props.loadGuestData()
+      this.props.getGuestCartProducts()
     }
   }
 
@@ -68,14 +66,16 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    loadInitialData() {
-      dispatch(me())
-      dispatch(getCartProducts())
-    },
-    loadGuestData() {
-      dispatch(me())
-      dispatch(getGuestCartProducts())
-    }
+    me: () => dispatch(me()),
+    getCartProducts: () => dispatch(getCartProducts()),
+    getGuestCartProducts: () => dispatch(getGuestCartProducts())
+    // loadInitialData() {
+    //   dispatch(me())
+    //   dispatch(getCartProducts())
+    // },
+    // loadGuestData() {
+    //   dispatch(me())
+    //   dispatch(getGuestCartProducts())
   }
 }
 
@@ -87,6 +87,6 @@ export default withRouter(connect(mapState, mapDispatch)(Routes))
  * PROP TYPES
  */
 Routes.propTypes = {
-  loadInitialData: PropTypes.func.isRequired,
+  // loadInitialData: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired
 }

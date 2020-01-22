@@ -41,7 +41,9 @@ const Navbar = ({handleClick, isLoggedIn, cartProducts, guestCartProducts}) => {
             <Link to="/cart">
               <div id="cartIconAndCount" className="navRightSub">
                 <img src="cartIcon.png" className="cartIcon" />
-                <div className="cartCount">{cartQuantity}</div>
+                <div className="cartCount">
+                  {cartProducts.reduce((a, b) => a + b.quantity, 0)}
+                </div>
               </div>
             </Link>
           </div>
@@ -69,9 +71,6 @@ const Navbar = ({handleClick, isLoggedIn, cartProducts, guestCartProducts}) => {
   )
 }
 
-/**
- * CONTAINER
- */
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
@@ -90,9 +89,6 @@ const mapDispatch = dispatch => {
 
 export default connect(mapState, mapDispatch)(Navbar)
 
-/**
- * PROP TYPES
- */
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired

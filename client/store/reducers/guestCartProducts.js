@@ -16,6 +16,7 @@ const gotGuestProducts = products => {
     products
   }
 }
+
 const removedGuestProduct = productId => {
   return {
     type: REMOVE_GUEST_PRODUCT,

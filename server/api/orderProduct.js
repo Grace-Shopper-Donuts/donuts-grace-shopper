@@ -36,7 +36,7 @@ router.get('/cart', async (req, res, next) => {
     currentOrder = currentOrder[0]
     const cartProducts = await OrderProduct.findAll({
       where: {
-        orderId: currentOrder.id
+        orderId: currentOrder.dataValues.id
       },
       include: [
         {
